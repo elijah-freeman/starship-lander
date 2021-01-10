@@ -16,7 +16,8 @@ class AssetManager {
     };
 
     downloadAll(callback) {
-        if (this.downloadQueue.length === 0) setTimeout(callback, 10);
+        // TODO - Fix (remove setTimeout, canvas is not loading quick enough).
+        if (this.downloadQueue.length === 0) setTimeout(callback, 100);
         for (var i = 0; i < this.downloadQueue.length; i++) {
             var img = new Image();
             var that = this;
