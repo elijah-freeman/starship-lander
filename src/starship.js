@@ -8,6 +8,8 @@ class Starship {
         // TODO - is this path specified correctly?
         this.spritesheet = ASSET_MANAGER.getAsset("../res/Starship.png")
 
+        this.updateBB();
+
         // States
 
         // Movement
@@ -23,6 +25,10 @@ class Starship {
 
         this.simpleAnimation = new Animator(this.spritesheet, 100, 100, 128, 128, 1, 0.33, 0, false, true);
 
+    };
+
+    updateBB() {
+        this.BB = new BoundingBox(this.x, this.y, PARAMS.BLOCKWIDTH, PARAMS.BLOCKWIDTH);
     };
 
 
@@ -48,10 +54,9 @@ class Starship {
 
 
         // update position
-        this.x += this.velocity.x * TICK;
-        this.y += this.velocity.y * TICK;
-
-
+        this.x += this.velocity.x * TICK * PARAMS.SCALE;
+        this.y += this.velocity.y * TICK * PARAMS.SCALE;
+        this.updateBB();
 
     };
 
@@ -60,9 +65,12 @@ class Starship {
         // TODO - Change location of star ship on the map.
         ctx.drawImage(this.spritesheet, this.x, this.y);
         console.log(`X=${this.x} , Y=${this.y}`)
-        // this.simpleAnimation.drawFrame(this.game.clockTick, ctx, this.x , this.y, 1);
+        // this.simpleAnimation.drawFrame(this.game.clockTick, ctx, this.x , this.y, PARAMS.SCALE);
         // this.simpleAnimation.drawFrame(this.game.clockTick, ctx, 0, 0, 1);
 
-
+        if (PARAMS.DEBUG) {
+            ctx.strokeStyle = "Red";
+            ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y, this.BB.width, this.BB.height);
+        }
     };
 }

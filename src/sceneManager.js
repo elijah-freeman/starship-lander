@@ -24,6 +24,7 @@ class SceneManager {
     };
 
     update() {
+        PARAMS.DEBUG = document.getElementById("debug").checked;
 
     };
 

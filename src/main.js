@@ -6,6 +6,8 @@ var ASSET_MANAGER = new AssetManager();
 ASSET_MANAGER.queueDownload("../res/Starship.png");
 
 ASSET_MANAGER.downloadAll(function () {
+	PARAMS.BLOCKWIDTH = PARAMS.BITWIDTH * PARAMS.SCALE;
+
 	var canvas = document.getElementById('gameWorld');
 
 	var ctx = canvas.getContext('2d');
