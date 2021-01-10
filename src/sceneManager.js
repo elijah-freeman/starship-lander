@@ -18,6 +18,9 @@ class SceneManager {
         // TODO - May want to change (not sure what this is doing).
         this.x = 0;
 
+        this.greenalien = new GreenAlien(gameEngine, 600, 250);
+        gameEngine.addEntity(this.greenalien);
+
         // TODO - May need to change according to blockwidth, etc
         this.starship = new Starship(gameEngine, 100, 100);
         gameEngine.addEntity(this.starship);

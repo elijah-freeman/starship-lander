@@ -4,6 +4,8 @@ var ASSET_MANAGER = new AssetManager();
 
 // TODO - is path specified correctly?
 ASSET_MANAGER.queueDownload("../res/Starship.png");
+ASSET_MANAGER.queueDownload("../res/Alien-left-spritesheet.png");
+ASSET_MANAGER.queueDownload("../res/alien.png");
 
 ASSET_MANAGER.downloadAll(function () {
 	PARAMS.BLOCKWIDTH = PARAMS.BITWIDTH * PARAMS.SCALE;
