@@ -6,6 +6,8 @@ class GreenAlien {
         this.alienspritesheet = ASSET_MANAGER.getAsset("../res/alien.png");
         this.animation = new Animator(this.alienspritesheet, 0, 0,32, 32, 7, 0.2,
             0, false, true);
+
+        this.scaleSize  = 3;
     };
 
     updateBB() {
@@ -23,7 +25,7 @@ class GreenAlien {
     };
 
     draw(ctx) {
-        this.animation.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, PARAMS.SCALE);
+        this.animation.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, this.scaleSize);
     };
 
 
