@@ -13,8 +13,7 @@ class MarsGround {
     draw(ctx) {
         let groundCount = this.w / PARAMS.BLOCKWIDTH;
         for (var i = 0; i < groundCount; i++) {
-            ctx.drawImage(this.spritesheet, 0, 0, 128, 128, this.x + i * PARAMS.BLOCKWIDTH - this.game.camera.x, this.y - this.game.camera.y, PARAMS.BLOCKWIDTH, PARAMS.BLOCKWIDTH);
-            // ctx.drawImage(this.spritesheet, 0, 0, 128, 128, this.x + i * PARAMS.BLOCKWIDTH - this.game.camera.x, this.y + PARAMS.BLOCKWIDTH, PARAMS.BLOCKWIDTH, PARAMS.BLOCKWIDTH);
+            ctx.drawImage(this.spritesheet, 0, 0, 128, 128, this.x + i * PARAMS.BLOCKWIDTH - this.game.camera.x, this.y, PARAMS.BLOCKWIDTH, PARAMS.BLOCKWIDTH);
         }
     };
 

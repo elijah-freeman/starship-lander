@@ -62,14 +62,16 @@ class Starship {
     draw(ctx) {
 
         // TODO - Change location of star ship on the map.
-        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y - this.game.camera.y);
+        ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y);
+
+        // ctx.drawImage(this.spritesheet, this.x, this.y);
         console.log(`X=${this.x} , Y=${this.y}`)
         // this.simpleAnimation.drawFrame(this.game.clockTick, ctx, this.x , this.y, PARAMS.SCALE);
         // this.simpleAnimation.drawFrame(this.game.clockTick, ctx, 0, 0, 1);
 
         if (PARAMS.DEBUG) {
             ctx.strokeStyle = "Red";
-            ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
+            ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y, this.BB.width, this.BB.height);
         }
     };
 }
