@@ -4,8 +4,8 @@ var ASSET_MANAGER = new AssetManager();
 
 // TODO - is path specified correctly?
 ASSET_MANAGER.queueDownload("../res/Starship.png");
-ASSET_MANAGER.queueDownload("../res/Alien-left-spritesheet.png");
-ASSET_MANAGER.queueDownload("../res/alien.png");
+ASSET_MANAGER.queueDownload("../res/alien-left.png");
+ASSET_MANAGER.queueDownload("../res/alien-right.png");
 ASSET_MANAGER.queueDownload("../res/MarsGround.png");
 
 ASSET_MANAGER.downloadAll(function () {

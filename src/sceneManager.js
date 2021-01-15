@@ -23,7 +23,14 @@ class SceneManager {
         this.game.addEntity(ground);
 
 
-        this.greenalien = new GreenAlien(gameEngine, 1000, PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH+30);
+        // Green Aliens
+        this.greenalien = new GreenAlien(gameEngine, 1000, PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH+30, 0);
+        gameEngine.addEntity(this.greenalien);
+        this.greenalien = new GreenAlien(gameEngine, 300, PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH+30, 0);
+        gameEngine.addEntity(this.greenalien);
+        this.greenalien = new GreenAlien(gameEngine, 1200, PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH+30, 0);
+        gameEngine.addEntity(this.greenalien);
+        this.greenalien = new GreenAlien(gameEngine, 600, PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH+30, 0);
         gameEngine.addEntity(this.greenalien);
 
         // TODO - May need to change according to blockwidth, etc
@@ -37,6 +44,7 @@ class SceneManager {
         let midpoint = PARAMS.CANVAS_WIDTH / 2 - PARAMS.BLOCKWIDTH /2;
         this.x = this.starship.x - midpoint;
         this.y = this.starship.y - midpoint;
+
 
     };
 
