@@ -6,19 +6,10 @@ class GameEngine {
         this.showOutlines = false;
         this.ctx = null;
 
-        // TODO - For mouse control
-        // this.click = null;
-        // this.mouse = null;
-        // this.wheel = null;
-        // this.surfaceWidth = null;
-        // this.surfaceHeight = null;
-
-
         this.left = false;
         this.right = false;
         this.up = false;
         this.down = false;
-
     };
 
     init(ctx) {
@@ -40,16 +31,14 @@ class GameEngine {
     startInput() {
         var that = this;
 
-
-        // Go to canvas and add a listener to function and listen for "keydown" event. When that
-        // event is triggered it will pass in the event to the anonymous function for execution.
+        // Let us know when key is pressed.
         this.ctx.canvas.addEventListener("keydown", function (e) {
             console.log(e);
             switch (e.code) {
-                // Set up in this way so that user can use WASD or arrow keys.
+                // User can use WASD or arrow keys.
                 case "ArrowLeft":
                 case "KeyA":
-                    that.left = true; // left is a property in defined in our gameengine constructor
+                    that.left = true;
                     break;
                 case "ArrowRight":
                 case "KeyD":
@@ -87,43 +76,6 @@ class GameEngine {
                     break;
             }
         }, false);
-
-
-
-
-
-
-        // TODO - The following commented code is for mouse input.
-        // var getXandY = function (e) {
-        //     var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
-        //     var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
-        //
-        //     return { x: x, y: y };
-        // }
-        //
-        // this.ctx.canvas.addEventListener("mousemove", function (e) {
-        //     //console.log(getXandY(e));
-        //     that.mouse = getXandY(e);
-        // }, false);
-        //
-        // this.ctx.canvas.addEventListener("click", function (e) {
-        //     //console.log(getXandY(e));
-        //     that.click = getXandY(e);
-        // }, false);
-        //
-        // this.ctx.canvas.addEventListener("wheel", function (e) {
-        //     //console.log(getXandY(e));
-        //     that.wheel = e;
-        //     //       console.log(e.wheelDelta);
-        //     e.preventDefault();
-        // }, false);
-        //
-        // this.ctx.canvas.addEventListener("contextmenu", function (e) {
-        //     //console.log(getXandY(e));
-        //     that.rightclick = getXandY(e);
-        //     e.preventDefault();
-        // }, false);
-
     };
 
     addEntity(entity) {
@@ -166,4 +118,4 @@ class GameEngine {
         this.update();
         this.draw();
     };
-};
+}
