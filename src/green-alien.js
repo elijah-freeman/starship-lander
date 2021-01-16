@@ -1,51 +1,70 @@
 class GreenAlien {
     constructor(game, x, y, facing) {
         Object.assign(this, {game, x, y, facing});
-        this.velocity = {x: -PARAMS.BITWIDTH, y:0};
-        // this.velocity = {x: Math.pow(-1, this.facing) * PARAMS.BITWIDTH, y: 0};
+
+        // Green Alien sprite sheet animations.
         this.spritesheetLeft = ASSET_MANAGER.getAsset("../res/alien-left.png");
         this.spritesheetRight = ASSET_MANAGER.getAsset("../res/alien-right.png");
         this.animation = [];
 
+        // Green Alien Physics
+        this.velocity = {x: -PARAMS.BITWIDTH, y:0};
+
+        // Scalar value to determine size of Green Alien.
+        this.scaleSize  = 3;
+
+        this.updateBB();
+        this.loadAnimations();
+    };
+
+    /**
+    * Creates new animator objects for each astronaut animation and appends those animations
+    * to a list of animations.
+    */
+    loadAnimations() {
         this.animation.push(new Animator(this.spritesheetLeft, 0, 0,32, 32, 7, 0.2,
             0, false, true));
         this.animation.push(new Animator(this.spritesheetRight, 0, 0,32, 32, 7, 0.2,
             0, false, true));
-
-        this.updateBB();
-        this.scaleSize  = 3;
     };
 
     updateBB() {
         this.BB = new BoundingBox(this.x, this.y, PARAMS.BLOCKWIDTH, PARAMS.BLOCKWIDTH)
     };
 
+    /**
+     * Updates the movement and the direction that the Green Alien moves in.
+     */
     update() {
-        let that = this;
-        // TODO - Give this a proper acceleration.
-        this.velocity.y += 10 * this.game.clockTick;
+
+        // Reverse alien if they come in contact with the canvas border
+        if (this.BB.left <= 0 && this.facing === 0) {
+            this.velocity.x = -this.velocity.x;
+            this.facing = (this.facing + 1) % 2;
+        }
+        if (this.BB.right >= PARAMS.CANVAS_WIDTH && this.facing === 1) {
+            this.velocity.x = -this.velocity.x;
+            this.facing = (this.facing + 1) % 2;
+        }
+
+        // Update x, y coordinates of Green Alien.
         this.x += this.game.clockTick * this.velocity.x * PARAMS.SCALE;
         this.y += this.game.clockTick * this.velocity.y * PARAMS.SCALE;
-        // TODO - need to consider how we are going to approach the bounding box when alien comes in contact w/ others.
+
+        // Update velocity of Green Alien.
+        this.velocity.y += 10 * this.game.clockTick;
         this.velocity.y = 0;
 
-  //       Reverse alien if they come in contact with the canvas border
-        if (that.BB.left <= 0 && this.facing === 0) {
-            that.velocity.x = -that.velocity.x;
-            that.facing = (that.facing + 1) % 2;
-        }
-
-        if (that.BB.right >= PARAMS.CANVAS_WIDTH && this.facing === 1) {
-            that.velocity.x = -that.velocity.x;
-            that.facing = (that.facing + 1) % 2;
-        }
-
-
+        // Update bounding box.
         this.updateBB();
     };
 
+    /**
+     * Draw method to animate Green Alien.
+     * @param ctx the context.
+     */
     draw(ctx) {
-        // this.animation.drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, this.scaleSize);
+        // Animate Green Alien.
         this.animation[this.facing].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scaleSize);
 
         if (PARAMS.DEBUG) {
@@ -53,10 +72,5 @@ class GreenAlien {
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y, this.BB.width, this.BB.height);
         }
     };
-
-
-
-
-
 
 }
