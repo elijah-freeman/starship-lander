@@ -5,11 +5,11 @@ class Astronaut {
         this.spriteWalkLeft = ASSET_MANAGER.getAsset("../res/astronaut/astronaut-left.png");
         this.spriteWalkRight = ASSET_MANAGER.getAsset("../res/astronaut/astronaut-right.png");
         this.spriteMoveUpRight = ASSET_MANAGER.getAsset("../res/astronaut/astronautUpRightDir.png");
-        this.spriteMoveUpLeft = ASSET_MANAGER.getAsset("..res/astronaut/astronautUpLeftDir.png");
-        this.spriteDownRight = ASSET_MANAGER.getAsset("..res/astronaut/astronautDownRight.png");
-        this.spriteDownLeft = ASSET_MANAGER.getAsset("..res/astronaut/astronautDownLeft.png");
-        this.spriteUpRight = ASSET_MANAGER.getAsset("..res/astronaut/astronautUpRight.png");
-        this.spriteUpLeft = ASSET_MANAGER.getAsset("..res/astronaut/astronautUpRight.png");
+        this.spriteMoveUpLeft = ASSET_MANAGER.getAsset("../res/astronaut/astronautUpLeftDir.png");
+        this.spriteDownRight = ASSET_MANAGER.getAsset("../res/astronaut/astronautDownRight.png");
+        this.spriteDownLeft = ASSET_MANAGER.getAsset("../res/astronaut/astronautDownLeft.png");
+        this.spriteUpRight = ASSET_MANAGER.getAsset("../res/astronaut/astronautUpRight.png");
+        this.spriteUpLeft = ASSET_MANAGER.getAsset("../res/astronaut/astronautUpRight.png");
 
 
         this.velocity = {x : 0, y : 0};
@@ -27,6 +27,13 @@ class Astronaut {
     loadAnimations() {
         this.animations.push(new Animator(this.spriteWalkLeft, 0, 0, 41, 54, 7, 0.02, 0, false, true));
         this.animations.push(new Animator(this.spriteWalkRight, 0, 0, 41, 54, 7, 0.2, 0, false, true));
+        this.animations.push(new Animator(this.spriteMoveUpRight, 0, 0, 42, 51, 4, 0.2, 0, false, true));
+        this.animations.push(new Animator(this.spriteMoveUpLeft, 0, 0, 42, 51, 4, 0.2, 0, false, true));
+        this.animations.push(new Animator(this.spriteDownRight, 0, 0, 41, 52, 5, 0.2, 0, false, true));
+        this.animations.push(new Animator(this.spriteDownLeft, 0, 0, 41, 52, 5, 0.2, 0, false, true));
+        this.animations.push(new Animator(this.spriteUpRight, 0, 0, 41, 52, 4, 0.2, 0, false, true));
+        this.animations.push(new Animator(this.spriteUpLeft, 0, 0, 41, 52, 4, 0.2, 0, false, true));
+
     };
 
     updateBB() {
@@ -59,7 +66,7 @@ class Astronaut {
 
     draw(ctx) {
 
-        this.animations[1].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scaleSize);
+        this.animations[2].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scaleSize);
         console.log(`X=${this.x} , Y=${this.y}`);
 
 
@@ -69,9 +76,5 @@ class Astronaut {
         }
 
     };
-
-
-
-
 
 }
