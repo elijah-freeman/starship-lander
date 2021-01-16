@@ -33,19 +33,30 @@ class SceneManager {
         this.greenalien = new GreenAlien(gameEngine, 600, PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH+30, 0);
         gameEngine.addEntity(this.greenalien);
 
+        //chutulu
+        this.chutulu = new Chutulu(gameEngine, 700, 20);
+        gameEngine.addEntity(this.chutulu);
+
+
         // TODO - May need to change according to blockwidth, etc
         this.starship = new Starship(gameEngine, 100, 100);
         gameEngine.addEntity(this.starship);
+
+        this.astronaut = new Astronaut(this.game, 0, PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH + 30);
+        this.game.addEntity(this.astronaut);
+
+
     };
 
     update() {
         PARAMS.DEBUG = document.getElementById("debug").checked;
 
         let midpoint = PARAMS.CANVAS_WIDTH / 2 - PARAMS.BLOCKWIDTH /2;
-        this.x = this.starship.x - midpoint;
-        this.y = this.starship.y - midpoint;
+        // this.x = this.starship.x - midpoint;
+        // this.y = this.starship.y - midpoint;
 
-
+        this.x = this.astronaut.x - midpoint;
+        this.y = this.astronaut.y - midpoint;
     };
 
     draw(ctx) {
