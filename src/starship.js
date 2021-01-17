@@ -12,19 +12,21 @@ class Starship {
 
         // States
 
+        this.scaleSize = 8;
+
         // Movement
         this.velocity = {x: 0, y: 0}
 
         // Animations
-        this.animation = [];
+        this.animations = [];
         this.loadAnimations();
     };
 
     loadAnimations() {
         // TODO - Will be more complex after we add different animations.
 
-        this.simpleAnimation = new Animator(this.spritesheet, 100, 100, 128, 128, 1, 0.33, 0, false, true);
-
+        let simpleAnimation = new Animator(this.spritesheet, 0, 0, 128, 128, 1, 0.33, 0, false, true);
+        this.animations.push(simpleAnimation);
     };
 
     updateBB() {
@@ -64,11 +66,12 @@ class Starship {
         // TODO - Change location of star ship on the map.
         // ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y);
 
-        ctx.drawImage(this.spritesheet, this.x, this.y);
+        // ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y);
 
         // ctx.drawImage(this.spritesheet, this.x, this.y);
         console.log(`X=${this.x} , Y=${this.y}`)
-        // this.simpleAnimation.drawFrame(this.game.clockTick, ctx, this.x , this.y, PARAMS.SCALE);
+        this.animations[0].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x , PARAMS.CANVAS_HEIGHT - PARAMS.BLOCKWIDTH*this.scaleSize
+            - this.game.camera.y, this.scaleSize);
         // this.simpleAnimation.drawFrame(this.game.clockTick, ctx, 0, 0, 1);
 
         // if (PARAMS.DEBUG) {

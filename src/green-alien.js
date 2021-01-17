@@ -29,7 +29,7 @@ class GreenAlien {
     };
 
     updateBB() {
-        this.BB = new BoundingBox(this.x, this.y, PARAMS.BLOCKWIDTH, PARAMS.BLOCKWIDTH)
+        this.BB = new BoundingBox(this.x, this.y, 32 * this.scaleSize, 32 * this.scaleSize);
     };
 
     /**
@@ -65,11 +65,11 @@ class GreenAlien {
      */
     draw(ctx) {
         // Animate Green Alien.
-        this.animation[this.facing].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scaleSize);
+        this.animation[this.facing].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y-this.game.camera.y, this.scaleSize);
 
         if (PARAMS.DEBUG) {
             ctx.strokeStyle = 'Red';
-            ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y, this.BB.width, this.BB.height);
+            ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
         }
     };
 

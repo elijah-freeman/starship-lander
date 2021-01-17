@@ -44,7 +44,7 @@ class Astronaut {
      * Update method for astronaut bounding box.
      */
     updateBB() {
-        this.BB = new BoundingBox(this.x, this.y, PARAMS.BLOCKWIDTH, PARAMS.BLOCKWIDTH);
+        this.BB = new BoundingBox(this.x, this.y, 42 * this.scaleSize, 54 * this.scaleSize);
     };
 
     /**
@@ -125,6 +125,21 @@ class Astronaut {
         this.x += this.velocity.x * TICK * PARAMS.SCALE;
         this.y += this.velocity.y * TICK * PARAMS.SCALE;
 
+
+        // collisions
+        let that = this;
+        this.game.entities.forEach(function (entity) {
+            if (entity.BB && that.BB.collide(entity.BB)) {
+                if ((entity instanceof MarsGround || entity instanceof GreenAlien)
+                && (that.BB.bottom - that.velocity.y * TICK * that.scaleSize) <= entity.BB.top) {
+                    that.y = entity.BB.top - 40;
+                    that.velocity.y === 0;
+                }
+            }
+        });
+
+
+
         // Update Bounding Box
         this.updateBB();
     };
@@ -136,12 +151,12 @@ class Astronaut {
      */
     draw(ctx) {
         // Draw animation.
-        this.animations[this.direction].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y, this.scaleSize);
+        this.animations[this.direction].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, this.scaleSize);
         // For testing purposes.
         // console.log(`X=${this.x} , Y=${this.y}`);
         if (PARAMS.DEBUG) {
             ctx.strokeStyle = "Red";
-            ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y, this.BB.width, this.BB.height);
+            ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
         }
     };
 }
