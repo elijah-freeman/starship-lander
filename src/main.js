@@ -16,6 +16,7 @@ ASSET_MANAGER.queueDownload("../res/astronaut/astronautDownRight.png");
 ASSET_MANAGER.queueDownload("../res/astronaut/astronautDownLeft.png");
 ASSET_MANAGER.queueDownload("../res/astronaut/astronautUpRight.png");
 ASSET_MANAGER.queueDownload("../res/astronaut/astronautUpLeft.png");
+ASSET_MANAGER.queueDownload("../res/marsLandscape.png");
 
 
 

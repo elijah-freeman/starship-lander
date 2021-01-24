@@ -126,17 +126,17 @@ class Astronaut {
         this.y += this.velocity.y * TICK * PARAMS.SCALE;
 
 
-        // collisions
-        let that = this;
-        this.game.entities.forEach(function (entity) {
-            if (entity.BB && that.BB.collide(entity.BB)) {
-                if ((entity instanceof MarsGround || entity instanceof GreenAlien)
-                && (that.BB.bottom - that.velocity.y * TICK * that.scaleSize) <= entity.BB.top) {
-                    that.y = entity.BB.top - 40;
-                    that.velocity.y === 0;
-                }
-            }
-        });
+        // // collisions
+        // let that = this;
+        // this.game.entities.forEach(function (entity) {
+        //     if (entity.BB && that.BB.collide(entity.BB)) {
+        //         if ((entity instanceof MarsGround || entity instanceof GreenAlien)
+        //         && (that.BB.bottom - that.velocity.y * TICK * that.scaleSize) <= entity.BB.top) {
+        //             that.y = entity.BB.top - 40;
+        //             that.velocity.y === 0;
+        //         }
+        //     }
+        // });
 
 
 

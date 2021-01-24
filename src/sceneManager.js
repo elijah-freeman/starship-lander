@@ -13,8 +13,12 @@ class SceneManager {
         this.x = 0;
         this.y = 0;
 
-        // Last parameters controls the number of blocks.
-        this.game.addEntity(new MarsGround(this.game, -PARAMS.CANVAS_WIDTH/2, PARAMS.CANVAS_HEIGHT - PARAMS.BLOCKWIDTH, 20 * PARAMS.BLOCKWIDTH));
+        // Background
+        this.game.addEntity(new Background(this.game, -1024, 0,"../res/marsLandscape.png"));
+        this.game.addEntity(new Background(this.game, 0, 0, "../res/marsLandscape.png"));
+        this.game.addEntity(new Background(this.game, 1024, 0, "../res/marsLandscape.png"));
+        this.game.addEntity(new Background(this.game, 2048, 0, "../res/marsLandscape.png"));
+
 
         // Green Aliens
         this.game.addEntity(new GreenAlien(this.game, 1000, PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH+30, 0));
