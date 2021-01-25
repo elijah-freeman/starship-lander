@@ -14,9 +14,10 @@ class Astronaut {
 
         this.animations = [];
 
-        this.direction = 1;
+        this.orientation = 1;
         this.facing = 1;
         this.velocity = {x : 0, y : 0};
+        this.state = 0;
 
         // Scalar value to determine size of astronaut.
         this.scaleSize = 2;
@@ -54,7 +55,7 @@ class Astronaut {
      */
     update() {
         // Directions that the astronaut moves in.
-        const Move = {
+        const Orientation = {
             LEFT: 0,
             RIGHT: 1,
             UP_RIGHT: 2,
@@ -70,74 +71,93 @@ class Astronaut {
             RIGHT: 1
         }
 
+        // Current state of astronaut
+        const State = {
+            NEUTRAL : 0,
+            FALLING : 1
+
+        }
+
         // Physics
         const TICK = this.game.clockTick;
-        const WALK_VEL = 500.0;
+        const WALK_VELOCITY = 300.0;
+        const FLY_VELOCITY = 900;
+        const DECELERATE_VELOCITY = 500;
+        const FALL_ACCELERATION = 600;
+
         this.velocity.x = 0;
         this.velocity.y = 0;
 
-        // Move Right
+        // Orientation Right
         if (this.game.right && !this.game.left && !this.game.up) {
-            this.velocity.x += WALK_VEL;
-            this.direction = Move.RIGHT;
+            this.velocity.x += WALK_VELOCITY;
+            this.orientation = Orientation.RIGHT;
             this.facing = Facing.RIGHT;
+            this.state = State.FALLING;
         }
-        // Move Left
+        // Orientation Left
         else if (this.game.left && !this.game.right && !this.game.up) {
-            this.velocity.x -= WALK_VEL;
-            this.direction = Move.LEFT;
+            this.velocity.x -= WALK_VELOCITY;
+            this.orientation = Orientation.LEFT;
             this.facing = Facing.LEFT;
+            this.state = State.FALLING;
         }
-        // Move Up and Right
+        // Orientation Up and Right
         else if (this.game.up && this.game.right && !this.game.left) {
-            this.velocity.y -= WALK_VEL;
-            this.velocity.x += WALK_VEL;
-            this.direction = Move.UP_RIGHT;
+            this.velocity.y -= FLY_VELOCITY;
+            this.velocity.x += FLY_VELOCITY;
+            this.orientation = Orientation.UP_RIGHT;
             this.facing = Facing.RIGHT;
+            this.state = State.FALLING;
         }
-        // Move Up and Left
+        // Orientation Up and Left
         else if (this.game.up && !this.game.right && this.game.left) {
-            this.velocity.y -= WALK_VEL;
-            this.velocity.x -= WALK_VEL;
-            this.direction = Move.UP_LEFT;
+            this.velocity.y -= FLY_VELOCITY;
+            this.velocity.x -= FLY_VELOCITY;
+            this.orientation = Orientation.UP_LEFT;
             this.facing = Facing.LEFT;
+            this.state = State.FALLING;
         }
-        // Move Up
+        // Orientation Up
         else if (this.game.up && !this.game.right && !this.game.left) {
-            this.velocity.y -= WALK_VEL;
+            this.velocity.y -= FLY_VELOCITY;
             if (this.facing === Facing.LEFT) {
-                this.direction = Move.UP_FACE_LEFT;
+                this.orientation = Orientation.UP_FACE_LEFT;
             } else {
-                this.direction = Move.UP_FACE_RIGHT;
+                this.orientation = Orientation.UP_FACE_RIGHT;
+            }
+            this.state = State.FALLING;
+        }
+        // Orientation down
+        else if (this.game.down && !this.game.right && !this.game.left) {
+            if (this.y <= PARAMS.CANVAS_HEIGHT - PARAMS.GROUND_LEVEL) {
+                this.velocity.y -= DECELERATE_VELOCITY;
+            }
+
+            if (this.facing === Facing.LEFT) {
+                this.orientation = Orientation.DOWN_LEFT;
+            } else {
+                this.orientation = Orientation.DOWN_RIGHT;
             }
         }
-        // Move down
-        else if (this.game.down && !this.game.right && !this.game.left) {
-            this.velocity.y += WALK_VEL;
+        // Not moving
+        else {
+            this.state = State.FALLING;
             if (this.facing === Facing.LEFT) {
-                this.direction = Move.DOWN_LEFT;
+                this.orientation = Orientation.LEFT;
             } else {
-                this.direction = Move.DOWN_RIGHT;
+                this.orientation = Orientation.RIGHT;
             }
+        }
+
+        // If you are are not moving up then fall until you reach ground level.
+        if (this.state === State.FALLING && this.y < PARAMS.CANVAS_HEIGHT - PARAMS.GROUND_LEVEL) {
+            this.velocity.y += FALL_ACCELERATION
         }
 
         // Update the coordinates of the astronaut.
         this.x += this.velocity.x * TICK * PARAMS.SCALE;
         this.y += this.velocity.y * TICK * PARAMS.SCALE;
-
-
-        // // collisions
-        // let that = this;
-        // this.game.entities.forEach(function (entity) {
-        //     if (entity.BB && that.BB.collide(entity.BB)) {
-        //         if ((entity instanceof MarsGround || entity instanceof GreenAlien)
-        //         && (that.BB.bottom - that.velocity.y * TICK * that.scaleSize) <= entity.BB.top) {
-        //             that.y = entity.BB.top - 40;
-        //             that.velocity.y === 0;
-        //         }
-        //     }
-        // });
-
 
 
         // Update Bounding Box
@@ -151,7 +171,7 @@ class Astronaut {
      */
     draw(ctx) {
         // Draw animation.
-        this.animations[this.direction].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, this.scaleSize);
+        this.animations[this.orientation].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, this.scaleSize);
         // For testing purposes.
         // console.log(`X=${this.x} , Y=${this.y}`);
         if (PARAMS.DEBUG) {
