@@ -82,7 +82,7 @@ class SceneManager {
 
 
 
-        for (let i = 0; i < 5000; i++) {
+        for (let i = 0; i < 4000; i++) {
             let xPosition = Math.floor(Math.random() * 10000 + 2200);
             let yPosition = Math.floor(PARAMS.CANVAS_HEIGHT - Math.random() * 150 - 50);
             let type = Math.floor(Math.random() * 13);
