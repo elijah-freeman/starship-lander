@@ -33,7 +33,7 @@ class GameEngine {
 
         // Let us know when key is pressed.
         this.ctx.canvas.addEventListener("keydown", function (e) {
-            console.log(e);
+            // console.log(e);
             switch (e.code) {
                 // User can use WASD or arrow keys.
                 case "ArrowLeft":

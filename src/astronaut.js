@@ -45,6 +45,7 @@ class Astronaut {
      * Update method for astronaut bounding box.
      */
     updateBB() {
+        this.lastBB = this.BB;
         this.BB = new BoundingBox(this.x, this.y, 42 * this.scaleSize, 54 * this.scaleSize);
     };
 
@@ -158,10 +159,36 @@ class Astronaut {
         // Update the coordinates of the astronaut.
         this.x += this.velocity.x * TICK * PARAMS.SCALE;
         this.y += this.velocity.y * TICK * PARAMS.SCALE;
+        this.updateBB();
+
+        let that = this;
+        this.game.entities.forEach(function (entity) {
+            if (entity.BB && that.BB.collide(entity.BB)) {
+
+                if (that.velocity.y > 0) {
+                    if ((entity instanceof Boulder) && (that.lastBB.bottom) <= entity.BB.top) {
+                        that.y = entity.BB.top - 110;
+                        that.velocity.y = 0;
+                        that.updateBB();
+                    }
+                }
+
+                if ((entity instanceof Boulder) && that.BB.bottom > entity.BB.top) {
+                    if (that.BB.right >= entity.BB.left && that.x <= entity.BB.left) {
+                        that.x = entity.BB.left - 84;
+                        if (that.velocity.x > 0) that.velocity.x = 0;
+                    } else {
+                        that.x = entity.BB.right;
+                        if (that.velocity.x < 0) that.velocity.x = 0;
+                    }
+                    that.updateBB();
+                }
+            }
+        });
 
 
         // Update Bounding Box
-        this.updateBB();
+
     };
 
     /**
@@ -172,8 +199,6 @@ class Astronaut {
     draw(ctx) {
         // Draw animation.
         this.animations[this.orientation].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, this.scaleSize);
-        // For testing purposes.
-        // console.log(`X=${this.x} , Y=${this.y}`);
         if (PARAMS.DEBUG) {
             ctx.strokeStyle = "Red";
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);

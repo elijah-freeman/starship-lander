@@ -69,7 +69,7 @@ class Starship {
         // ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y);
 
         // ctx.drawImage(this.spritesheet, this.x, this.y);
-        console.log(`X=${this.x} , Y=${this.y}`)
+        // console.log(`X=${this.x} , Y=${this.y}`)
         this.animations[0].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x , PARAMS.CANVAS_HEIGHT - PARAMS.BLOCKWIDTH*this.scaleSize
             - this.game.camera.y, this.scaleSize);
         // this.simpleAnimation.drawFrame(this.game.clockTick, ctx, 0, 0, 1);
