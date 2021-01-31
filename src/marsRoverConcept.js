@@ -2,7 +2,7 @@ class MarsRoverConcept {
     constructor(game, x, y) {
         Object.assign(this, {game, x, y});
 
-        this.sprite = ASSET_MANAGER.getAsset("../res/MarsRoverConcept.png");
+        this.sprite = ASSET_MANAGER.getAsset("./res/MarsRoverConcept.png");
 
         this.width = 122;
         this.height = 58;

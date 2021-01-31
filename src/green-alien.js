@@ -3,8 +3,8 @@ class GreenAlien {
         Object.assign(this, {game, x, y, facing});
 
         // Green Alien sprite sheet animations.
-        this.spritesheetLeft = ASSET_MANAGER.getAsset("../res/alien-left.png");
-        this.spritesheetRight = ASSET_MANAGER.getAsset("../res/alien-right.png");
+        this.spritesheetLeft = ASSET_MANAGER.getAsset("./res/alien-left.png");
+        this.spritesheetRight = ASSET_MANAGER.getAsset("./res/alien-right.png");
         this.animation = [];
 
         // Green Alien Physics

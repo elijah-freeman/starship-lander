@@ -14,10 +14,10 @@ class SceneManager {
         this.y = 0;
 
         // Background
-        this.game.addEntity(new Background(this.game, -1024, 0,"../res/marsLandscape.png"));
-        this.game.addEntity(new Background(this.game, 0, 0, "../res/marsLandscape.png"));
-        this.game.addEntity(new Background(this.game, 1024, 0, "../res/marsLandscape.png"));
-        this.game.addEntity(new Background(this.game, 2048, 0, "../res/marsLandscape.png"));
+        this.game.addEntity(new Background(this.game, -1024, 0,"./res/marsLandscape.png"));
+        this.game.addEntity(new Background(this.game, 0, 0, "./res/marsLandscape.png"));
+        this.game.addEntity(new Background(this.game, 1024, 0, "./res/marsLandscape.png"));
+        this.game.addEntity(new Background(this.game, 2048, 0, "./res/marsLandscape.png"));
 
         // Rocks
         this.game.addEntity(new Rock(this.game, 100, PARAMS.CANVAS_HEIGHT - 100, 0));

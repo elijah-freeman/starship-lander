@@ -6,7 +6,7 @@ class Starship {
         this.game.starship = this;
 
         // TODO - is this path specified correctly?
-        this.spritesheet = ASSET_MANAGER.getAsset("../res/Starship.png")
+        this.spritesheet = ASSET_MANAGER.getAsset("./res/Starship.png")
 
         this.updateBB();
 

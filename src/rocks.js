@@ -1,7 +1,7 @@
 class Rock {
     constructor(game, x, y, type) {
         Object.assign(this, {game, x, y, type});
-        this.sprite = ASSET_MANAGER.getAsset("../res/Rocks.png");
+        this.sprite = ASSET_MANAGER.getAsset("./res/Rocks.png");
 
         this.width = 35;
         this.height = 15;

@@ -3,14 +3,14 @@ class Astronaut {
         Object.assign(this, {game, x, y});
 
         // Astronaut sprite sheet animations.
-        this.spriteWalkLeft = ASSET_MANAGER.getAsset("../res/astronaut/astronaut-left.png");
-        this.spriteWalkRight = ASSET_MANAGER.getAsset("../res/astronaut/astronaut-right.png");
-        this.spriteMoveUpRight = ASSET_MANAGER.getAsset("../res/astronaut/astronautUpRightDir.png");
-        this.spriteMoveUpLeft = ASSET_MANAGER.getAsset("../res/astronaut/astronautUpLeftDir.png");
-        this.spriteDownRight = ASSET_MANAGER.getAsset("../res/astronaut/astronautDownRight.png");
-        this.spriteDownLeft = ASSET_MANAGER.getAsset("../res/astronaut/astronautDownLeft.png");
-        this.spriteUpRight = ASSET_MANAGER.getAsset("../res/astronaut/astronautUpRight.png");
-        this.spriteUpLeft = ASSET_MANAGER.getAsset("../res/astronaut/astronautUpRight.png");
+        this.spriteWalkLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronaut-left.png");
+        this.spriteWalkRight = ASSET_MANAGER.getAsset("./res/astronaut/astronaut-right.png");
+        this.spriteMoveUpRight = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpRightDir.png");
+        this.spriteMoveUpLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpLeftDir.png");
+        this.spriteDownRight = ASSET_MANAGER.getAsset("./res/astronaut/astronautDownRight.png");
+        this.spriteDownLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronautDownLeft.png");
+        this.spriteUpRight = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpRight.png");
+        this.spriteUpLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpRight.png");
 
         this.animations = [];
 
