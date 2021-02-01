@@ -19,7 +19,7 @@ class SceneManager {
         this.game.addEntity(new Background(this.game, 1024, 0, "./res/marsLandscape.png"));
         this.game.addEntity(new Background(this.game, 2048, 0, "./res/marsLandscape.png"));
 
-        // Rocks
+        // // Rocks
         this.game.addEntity(new Rock(this.game, 100, PARAMS.CANVAS_HEIGHT - 100, 0));
         this.game.addEntity(new Rock(this.game, 200, PARAMS.CANVAS_HEIGHT - 100, 1));
         this.game.addEntity(new Rock(this.game, 250, PARAMS.CANVAS_HEIGHT - 115, 2));
@@ -87,8 +87,6 @@ class SceneManager {
             let yPosition = Math.floor(PARAMS.CANVAS_HEIGHT - Math.random() * 150 - 50);
             let type = Math.floor(Math.random() * 13);
 
-            console.log(yPosition);
-
             this.game.addEntity(new Rock(this.game, xPosition, yPosition, type));
         }
 
@@ -99,8 +97,6 @@ class SceneManager {
             let xPosition = Math.floor(Math.random() * 5000 + 10000);
             let yPosition = Math.floor(PARAMS.CANVAS_HEIGHT - Math.random() * 150 - 50);
             let type = Math.floor(Math.random() * 13);
-
-            console.log(yPosition);
 
             this.game.addEntity(new Rock(this.game, xPosition, yPosition, type));
         }

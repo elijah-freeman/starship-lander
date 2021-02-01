@@ -2,7 +2,6 @@ const gameEngine = new GameEngine();
 
 const ASSET_MANAGER = new AssetManager();
 
-// TODO - is path specified correctly?
 ASSET_MANAGER.queueDownload("./res/Starship.png");
 ASSET_MANAGER.queueDownload("./res/alien-left.png");
 ASSET_MANAGER.queueDownload("./res/alien-right.png");

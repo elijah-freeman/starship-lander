@@ -2,10 +2,8 @@ class Starship {
     constructor(game, x, y) {
         Object.assign(this, {game, x, y});
 
-        // TODO - what is this doing?
         this.game.starship = this;
 
-        // TODO - is this path specified correctly?
         this.spritesheet = ASSET_MANAGER.getAsset("./res/Starship.png")
 
         this.updateBB();
@@ -23,7 +21,6 @@ class Starship {
     };
 
     loadAnimations() {
-        // TODO - Will be more complex after we add different animations.
 
         let simpleAnimation = new Animator(this.spritesheet, 0, 0, 128, 128, 1, 0.33, 0, false, true);
         this.animations.push(simpleAnimation);
@@ -63,7 +60,6 @@ class Starship {
 
     draw(ctx) {
 
-        // TODO - Change location of star ship on the map.
         // ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y);
 
         // ctx.drawImage(this.spritesheet, this.x - this.game.camera.x, this.y);
