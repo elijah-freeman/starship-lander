@@ -94,7 +94,7 @@ class SceneManager {
 
 
         for (let i = 0; i < 2000; i++) {
-            let xPosition = Math.floor(Math.random() * 5000 + 10000);
+            let xPosition = Math.floor(Math.random() * 5000 + 12200);
             let yPosition = Math.floor(PARAMS.CANVAS_HEIGHT - Math.random() * 150 - 50);
             let type = Math.floor(Math.random() * 13);
 
@@ -103,13 +103,10 @@ class SceneManager {
 
 
 
-
-
-
-
-
-
         this.game.addEntity(new MarsRoverConcept(this.game, 5000, PARAMS.CANVAS_HEIGHT - 325));
+
+        this.game.addEntity(new CuriosityRover(this.game, 6500, PARAMS.CANVAS_HEIGHT - 325));
+
 
 
 

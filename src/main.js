@@ -18,8 +18,7 @@ ASSET_MANAGER.queueDownload("./res/marsLandscape.png");
 ASSET_MANAGER.queueDownload("./res/Rocks.png");
 ASSET_MANAGER.queueDownload("./res/Boulder.png");
 ASSET_MANAGER.queueDownload("./res/MarsRoverConcept.png");
-
-
+ASSET_MANAGER.queueDownload("./res/CuriosityRover.png");
 
 ASSET_MANAGER.downloadAll(function () {
 	PARAMS.BLOCKWIDTH = PARAMS.BITWIDTH * PARAMS.SCALE;
