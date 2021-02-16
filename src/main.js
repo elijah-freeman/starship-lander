@@ -21,6 +21,7 @@ ASSET_MANAGER.queueDownload("./res/MarsRoverConcept.png");
 ASSET_MANAGER.queueDownload("./res/CuriosityRover.png");
 ASSET_MANAGER.queueDownload("./res/undergroundMonsterAttack.png");
 ASSET_MANAGER.queueDownload("./res/undergroundMonsterWalking.png");
+ASSET_MANAGER.queueDownload("./res/rockMonsterCreation.png");
 
 ASSET_MANAGER.downloadAll(function () {
 	PARAMS.BLOCKWIDTH = PARAMS.BITWIDTH * PARAMS.SCALE;
