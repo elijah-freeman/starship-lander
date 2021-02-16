@@ -19,6 +19,8 @@ ASSET_MANAGER.queueDownload("./res/Rocks.png");
 ASSET_MANAGER.queueDownload("./res/Boulder.png");
 ASSET_MANAGER.queueDownload("./res/MarsRoverConcept.png");
 ASSET_MANAGER.queueDownload("./res/CuriosityRover.png");
+ASSET_MANAGER.queueDownload("./res/undergroundMonsterAttack.png");
+ASSET_MANAGER.queueDownload("./res/undergroundMonsterWalking.png");
 
 ASSET_MANAGER.downloadAll(function () {
 	PARAMS.BLOCKWIDTH = PARAMS.BITWIDTH * PARAMS.SCALE;
@@ -26,6 +28,7 @@ ASSET_MANAGER.downloadAll(function () {
 	const canvas = document.getElementById('gameWorld');
 
 	const ctx = canvas.getContext('2d');
+
 
 	// Getting the width of our canvas (adding to our params object).
 	PARAMS.CANVAS_WIDTH = canvas.width;
