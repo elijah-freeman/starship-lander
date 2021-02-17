@@ -19,6 +19,7 @@ class SceneManager {
         this.game.addEntity(new Background(this.game, 1024, 0, "./res/marsLandscape.png"));
         this.game.addEntity(new Background(this.game, 2048, 0, "./res/marsLandscape.png"));
 
+
         // // Rocks
         this.game.addEntity(new Rock(this.game, 100, PARAMS.CANVAS_HEIGHT - 100, 0));
         this.game.addEntity(new Rock(this.game, 200, PARAMS.CANVAS_HEIGHT - 100, 1));
@@ -100,9 +101,27 @@ class SceneManager {
 
             this.game.addEntity(new Rock(this.game, xPosition, yPosition, type));
         }
+	
+	//Add Pickups
+	for (let i = 0; i < 200; i++) {
+		let xPosition = Math.floor(Math.random() * 10000);
+		let yPosition = PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH + 50;
+		this.game.addEntity(new Battery(this.game, xPosition, yPosition));
+	}
+
+	for (let i = 0; i < 200; i++) {
+		let xPosition = Math.floor(Math.random() * 10000);
+		let yPosition = PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH + 50;
+		this.game.addEntity(new Oxygen(this.game, xPosition, yPosition));
+	}
 
 
-
+	for (let i = 0; i < 200; i++) {
+		let xPosition = Math.floor(Math.random() * 10000);
+		let yPosition = PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH + 50;
+		this.game.addEntity(new Jetpack(this.game, xPosition, yPosition));
+	}
+	
         this.game.addEntity(new MarsRoverConcept(this.game, 5000, PARAMS.CANVAS_HEIGHT - 325));
 
         this.game.addEntity(new CuriosityRover(this.game, 6500, PARAMS.CANVAS_HEIGHT - 325));
@@ -110,7 +129,7 @@ class SceneManager {
         this.game.addEntity(new UndergroundMonster(this.game, 7200, PARAMS.CANVAS_HEIGHT - 625, 0));
         this.game.addEntity(new UndergroundMonster(this.game, 8600, PARAMS.CANVAS_HEIGHT - 625, 1));
 
-        this.game.addEntity(new RockMonster(this.game, 9800, PARAMS.CANVAS_HEIGHT));
+        this.game.addEntity(new RockMonster(this.game, 9800, PARAMS.CANVAS_HEIGHT - 300));
 
 
 
