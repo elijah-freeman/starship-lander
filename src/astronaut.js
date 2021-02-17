@@ -23,6 +23,10 @@ class Astronaut {
 	    this.jetpackFuel = 5;
 	    this.isFuelDecreasing = true;
 	    this.oxygen = 10;
+	    this.isOxygenDecreasing = true;
+
+	    this.laserPower = 5;
+	    this.isLaserDecreasing = true;
 
 	    this.totalLife = 10;
 	    this.damage = 1;
@@ -182,7 +186,6 @@ class Astronaut {
 		    this.velocity.y += FALL_ACCELERATION;
 	    }
 
-	    console.log(this.isFuelRemaining());
 
 
         // Update the coordinates of the astronaut.
@@ -216,23 +219,26 @@ class Astronaut {
         });
 
         if (this.game.fire && this.isFireReady) {
-            if (this.facing) {
-                this.game.addEntity(new AstronautLaser(this.game, this.x - this.game.camera.x + this.width - 3 , this.y - this.game.camera.y + this.height/2 - 2, 1, this.facing));
-            } else {
-                this.game.addEntity(new AstronautLaser(this.game, this.x - this.game.camera.x - this.width/2 - 10, this.y - this.game.camera.y + this.height/2 - 2, 1, this.facing));
-
-            }
-
-
-            this.laserPosition = this.x - this.game.camera.x + this.width + 63 - 27;
-            this.isFireReady = false;
-            setTimeout(() => {
-                this.isFireReady = true;
-            }, 300);
+		this.isLaserPowerRemaining();
+		console.log(`Laser Power ${this.laserPower}`);
+		if (this.laserPower > 0) {
+		    if (this.facing) {
+			this.game.addEntity(new AstronautLaser(this.game, this.x - this.game.camera.x + this.width - 3 ,
+				this.y - this.game.camera.y + this.height/2 - 2, 1, this.facing));
+		    } else {
+			this.game.addEntity(new AstronautLaser(this.game, this.x - this.game.camera.x - this.width/2 - 10,
+				this.y - this.game.camera.y + this.height/2 - 2, 1, this.facing));
+		    }
+		    this.laserPosition = this.x - this.game.camera.x + this.width + 63 - 27;
+		    this.isFireReady = false;
+		    setTimeout(() => {
+			this.isFireReady = true;
+		    }, 300);
+		}
         }
 
 	    this.checkCollision(this.game.entities);
-	    console.log(this.jetpackFuel);
+	    this.isOxygenRemaining();
     }
 
 	checkCollision(entities) {
@@ -254,7 +260,7 @@ class Astronaut {
 	determinePickup(entity) {
 
 		if (entity instanceof Battery) {
-			this.health += 1;
+			this.laserPower += 1;
 		} else if (entity instanceof Jetpack) {
 			this.jetpackFuel += 1;
 		} else if (entity instanceof Oxygen) {
@@ -262,6 +268,31 @@ class Astronaut {
 		} 
 
 	}
+
+	isLaserPowerRemaining() {
+		if (this.isLaserDecreasing) {
+			this.isLaserDecreasing = false;
+			this.laserPower = this.laserPower > 0 ? this.laserPower - 1 : 0;
+			setTimeout(() => {
+				this.isLaserDecreasing = true;
+			}, 1000);
+		}
+	}
+
+	/**
+	 * User will have a set amount of oxygen and health. Over time the oxygen decreases and so the player
+	 * will have to retrieve the 02 packs. 
+	 */
+	isOxygenRemaining() {
+		if (this.isOxygenDecreasing) {
+			this.isOxygenDecreasing = false;
+			this.oxygen = this.oxygen > 0 ? this.oxygen - 1 : 0;
+			setTimeout(() => {
+				this.isOxygenDecreasing = true;
+			}, 1000);
+		}
+	}
+
 
 	isFuelRemaining() {
 		let isJetpack = true;
@@ -276,7 +307,7 @@ class Astronaut {
 	startFuelTimeout() {
 		if (this.isFuelDecreasing) {
 			this.isFuelDecreasing = false;
-			this.jetpackFuel--;
+			this.jetpackFuel = this.jetpackFuel > 0 ? this.jetpackFuel - 1 : 0;
 			setTimeout(() => {
 				this.isFuelDecreasing = true;
 			}, 300);
@@ -307,6 +338,8 @@ class Astronaut {
         }
     };
 }
+
+
 
 
 class AstronautLaser {
