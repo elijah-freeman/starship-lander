@@ -10,11 +10,15 @@ class UndergroundMonster {
         this.widthWalk = 276;
         this.heightWalk = 171;
 
-        this.animation = this.type;
         this.scale = 3;
+        this.velocity = {x, y};
+        this.isAttack = false;
+	    this.health = 100;
 
+        this.animation = this.type;
         this.animations = [];
         this.loadAnimations();
+        this.updateBB();
     }
 
     loadAnimations() {
@@ -23,8 +27,63 @@ class UndergroundMonster {
     }
 
     update() {
+
+        const TICK = this.game.clockTick;
+        const speed = 100;
+        this.velocity.x = 0;
+
+
+        if (!this.isAttack) {
+            this.animation = 0;
+            this.velocity.x -= speed;
+
+            setTimeout(() => {
+               this.animation = 1;
+               this.isAttack = true;
+            },  10000);
+
+        } else {
+            this.animation = 1;
+
+        }
+
+        if (this.isAttack) {
+
+            setTimeout(() => {
+                this.isAttack = false;
+                this.animation = 0;
+            }, 10000);
+        }
+
+        // Update the coordinates of the astronaut.
+        this.x += this.velocity.x * TICK * PARAMS.SCALE;
+
+        if (this.health === 0 && this.y < PARAMS.CANVAS_HEIGHT - 250 && this.animation === 0) {
+            this.y += this.velocity.y * TICK * PARAMS.SCALE;
+        }
+
+
         this.updateBB();
+
+	    this.checkCollision(this.game.entities);
+
     }
+
+	checkCollision(entities) {
+		const undergroundMonster = this;
+
+		entities.forEach(entity => {
+			if (entity.BB && undergroundMonster.BB.collide(entity.BB)) {
+				if (entity instanceof AstronautLaser) {
+					this.health = this.health > 0 ? this.health - 1 : 0;
+					console.log(`UndergroundMonster health: ${this.health}`);
+					entity.removeFromWorld = true;
+				}
+			}
+		})
+	}
+			
+			
 
     updateBB() {
         if (this.animation) { // Attack animation
@@ -32,6 +91,7 @@ class UndergroundMonster {
         } else {
             this.BB = new BoundingBox(this.x, this.y, this.widthWalk * this.scale, this.heightWalk * this.scale);
         }
+        // console.log(this.BB);
     }
 
     draw(ctx) {

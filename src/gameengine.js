@@ -10,6 +10,7 @@ class GameEngine {
         this.right = false;
         this.up = false;
         this.down = false;
+        this.fire = false;
     };
 
     init(ctx) {
@@ -52,6 +53,9 @@ class GameEngine {
                 case "KeyS":
                     that.down = true;
                     break;
+                case "Space":
+                    that.fire = true;
+                    break;
             }
         }, false);
 
@@ -73,6 +77,9 @@ class GameEngine {
                 case "ArrowDown":
                 case "KeyS":
                     that.down = false;
+                    break;
+                case "Space":
+                    that.fire = false;
                     break;
             }
         }, false);
@@ -99,17 +106,17 @@ class GameEngine {
             entity.update();
 
             // TODO - Currently do not have this function (found in enemies class - supermariobros)
-            // if (!entity.removeFromWorld) {
-            //     entity.update();
-            // }
+            if (!entity.removeFromWorld) {
+                entity.update();
+            }
         }
 
         // TODO - Currently do not have this function (found in enemies class - supermariobros)
-        // for (var i = this.entities.length - 1; i >= 0; --i) {
-        //     if (this.entities[i].removeFromWorld) {
-        //         this.entities.splice(i, 1);
-        //     }
-        // }
+        for (var i = this.entities.length - 1; i >= 0; --i) {
+            if (this.entities[i].removeFromWorld) {
+                this.entities.splice(i, 1);
+            }
+        }
     };
 
     loop() {
