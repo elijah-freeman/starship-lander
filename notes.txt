@@ -1,1 +1,14 @@
 use orbitron font
+
+Tasks
+------------
+
+	- Enemies need to fire bullets.
+	- Player needs to take damage when hit by bullet.
+(done)	- Player health needs to decrease automatically (ensures pick up of O2).
+(done)	- Battery require for laser.
+	- Distribute the game appropriately.
+	- Define movement for enemies. 
+	- Build map more appropriately (Balance gameplay).
+(work)	- Get healthbar / Oxygen Bar / Battery Bar. 
+	- Scripting Issue (Game is to large) (Minimize to a 1000px)

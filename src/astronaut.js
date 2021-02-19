@@ -19,17 +19,17 @@ class Astronaut {
         this.velocity = {x : 0, y : 0};
         this.state = 0;
 
-	    this.health = 10;
-	    this.jetpackFuel = 5;
-	    this.isFuelDecreasing = true;
-	    this.oxygen = 10;
-	    this.isOxygenDecreasing = true;
+	this.health = 144;
+	this.jetpackFuel = 144;
+	this.isFuelDecreasing = true;
+	this.oxygen = 144;
+	this.isOxygenDecreasing = true;
 
-	    this.laserPower = 5;
-	    this.isLaserDecreasing = true;
+	this.laserPower = 144;
+	this.isLaserDecreasing = true;
 
-	    this.totalLife = 10;
-	    this.damage = 1;
+	this.totalLife = 10;
+	this.damage = 1;
 
         // Scalar value to determine size of astronaut.
         this.scaleSize = 2;
@@ -220,7 +220,6 @@ class Astronaut {
 
         if (this.game.fire && this.isFireReady) {
 		this.isLaserPowerRemaining();
-		console.log(`Laser Power ${this.laserPower}`);
 		if (this.laserPower > 0) {
 		    if (this.facing) {
 			this.game.addEntity(new AstronautLaser(this.game, this.x - this.game.camera.x + this.width - 3 ,
@@ -239,7 +238,16 @@ class Astronaut {
 
 	    this.checkCollision(this.game.entities);
 	    this.isOxygenRemaining();
+	    this.checkFuelLevels();
     }
+
+	checkFuelLevels() {
+		const max = 144;
+		this.health = this.health > max ? max : this.health;
+		this.oxygen = this.oxygen > max ? max : this.oxygen;
+		this.jetpackFuel = this.jetpackFuel > max ? max : this.jetpackFuel;
+		this.laserPower = this.laserPower > max ? max : this.laserPower;
+	}
 
 	checkCollision(entities) {
 		let astronaut = this;
@@ -324,19 +332,48 @@ class Astronaut {
         // Draw animation.
         this.animations[this.orientation].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, this.scaleSize);
 
-
-	    ctx.fillStyle = "black";
-	    ctx.fillRect(10, 10, 150, 15);
-	    ctx.fillStyle = "blue";
-	    ctx.fillRect(10, 10, 150, 10);
-	    ctx.stroke();
-	    
+	    this.drawHealthBar(ctx);
+	    this.drawOxygenBar(ctx);
+	    this.drawBatteryBar(ctx);
+	    this.drawJetpackFuelBar(ctx);
 
         if (PARAMS.DEBUG) {
             ctx.strokeStyle = "Red";
             ctx.strokeRect(this.BB.x - this.game.camera.x, this.BB.y - this.game.camera.y, this.BB.width, this.BB.height);
         }
     };
+
+	drawHealthBar(ctx) {
+	    ctx.fillStyle = "black";
+	    ctx.fillRect(10, 5, 150, 15);
+	    ctx.fillStyle = "red";
+	    ctx.fillRect(13, 7, this.health, 10);
+	    ctx.stroke();
+	}
+	
+	drawOxygenBar(ctx) {
+	    ctx.fillStyle = "black";
+	    ctx.fillRect(10, 25, 150, 15);
+	    ctx.fillStyle = "blue";
+	    ctx.fillRect(13, 29, this.oxygen, 10);
+	    ctx.stroke();
+	}
+
+	drawBatteryBar(ctx) {
+	    ctx.fillStyle = "black";
+	    ctx.fillRect(10, 45, 150, 15);
+	    ctx.fillStyle = "green";
+	    ctx.fillRect(13, 47, this.laserPower, 10);
+	    ctx.stroke();
+	}
+
+	drawJetpackFuelBar(ctx) {
+	    ctx.fillStyle = "black";
+	    ctx.fillRect(10, 65, 150, 15);
+	    ctx.fillStyle = "orange";
+	    ctx.fillRect(13, 67, this.jetpackFuel, 10);
+	    ctx.stroke();
+	}
 }
 
 
@@ -368,7 +405,7 @@ class AstronautLaser {
 
     update() {
         const TICK = this.game.clockTick;
-        const bulletSpeed = 100;
+        const bulletSpeed = 500;
 
         this.velocity.x = 0;
 
