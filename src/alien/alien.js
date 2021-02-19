@@ -1,6 +1,6 @@
 class Alien {
-	constructor(game, x, y, width,  height) {
-		Object.assign(this, {game, x, y, width, height});
+	constructor(game, x, y, width,  height, scale) {
+		Object.assign(this, { game, x, y, width, height, scale });
 	}
 
 	update() {

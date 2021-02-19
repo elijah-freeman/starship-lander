@@ -107,33 +107,38 @@ class Astronaut {
 			this.orientation = Orientation.LEFT;
 			this.facing = Facing.LEFT;
 			this.state = State.FALLING;
-			this.startFuelTimeout();
 		}
 		// Orientation Up and Right
 		else if (this.game.up && this.game.right && !this.game.left) {
-			this.velocity.y -= FLY_VELOCITY;
+			if (this.jetpackFuel) {
+				this.velocity.y -= FLY_VELOCITY;
+				this.orientation = Orientation.UP_RIGHT;
+			}
 			this.velocity.x += FLY_VELOCITY;
-			this.orientation = Orientation.UP_RIGHT;
 			this.facing = Facing.RIGHT;
 			this.state = State.FALLING;
 			this.startFuelTimeout();
 		}
 		// Orientation Up and Left
 		else if (this.game.up && !this.game.right && this.game.left) {
-			this.velocity.y -= FLY_VELOCITY;
+			if (this.jetpackFuel) {
+				this.velocity.y -= FLY_VELOCITY;
+				this.orientation = Orientation.UP_LEFT;
+			}
 			this.velocity.x -= FLY_VELOCITY;
-			this.orientation = Orientation.UP_LEFT;
 			this.facing = Facing.LEFT;
 			this.state = State.FALLING;
 			this.startFuelTimeout();
 		}
 		// Orientation Up
 		else if (this.game.up && !this.game.right && !this.game.left) {
-			this.velocity.y -= FLY_VELOCITY;
-			if (this.facing === Facing.LEFT) {
-			this.orientation = Orientation.UP_FACE_LEFT;
-			} else {
-			this.orientation = Orientation.UP_FACE_RIGHT;
+			if (this.jetpackFuel) {
+				this.velocity.y -= FLY_VELOCITY;
+				if (this.facing === Facing.LEFT) {
+					this.orientation = Orientation.UP_FACE_LEFT;
+				} else {
+					this.orientation = Orientation.UP_FACE_RIGHT;
+				}
 			}
 			this.state = State.FALLING;
 			this.startFuelTimeout();

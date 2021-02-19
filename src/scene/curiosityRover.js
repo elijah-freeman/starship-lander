@@ -1,5 +1,6 @@
-class CuriosityRover {
+class CuriosityRover extends Vehicle {
     constructor(game, x, y) {
+	    super(game, x, y);
         Object.assign(this, {game, x, y});
 
         this.sprite = ASSET_MANAGER.getAsset("./res/CuriosityRover.png");
