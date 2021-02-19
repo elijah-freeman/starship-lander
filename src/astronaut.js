@@ -1,50 +1,47 @@
 class Astronaut {
-    constructor(game, x, y) {
-        Object.assign(this, {game, x, y});
+	constructor(game, x, y) {
+		Object.assign(this, {game, x, y});
 
-        // Astronaut sprite sheet animations.
-        this.spriteWalkLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronaut-left.png");
-        this.spriteWalkRight = ASSET_MANAGER.getAsset("./res/astronaut/astronaut-right.png");
-        this.spriteMoveUpRight = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpRightDir.png");
-        this.spriteMoveUpLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpLeftDir.png");
-        this.spriteDownRight = ASSET_MANAGER.getAsset("./res/astronaut/astronautDownRight.png");
-        this.spriteDownLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronautDownLeft.png");
-        this.spriteUpRight = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpRight.png");
-        this.spriteUpLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpRight.png");
+		// Astronaut sprite sheet animations.
+		this.spriteWalkLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronaut-left.png");
+		this.spriteWalkRight = ASSET_MANAGER.getAsset("./res/astronaut/astronaut-right.png");
+		this.spriteMoveUpRight = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpRightDir.png");
+		this.spriteMoveUpLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpLeftDir.png");
+		this.spriteDownRight = ASSET_MANAGER.getAsset("./res/astronaut/astronautDownRight.png");
+		this.spriteDownLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronautDownLeft.png");
+		this.spriteUpRight = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpRight.png");
+		this.spriteUpLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpRight.png");
 
-        this.animations = [];
+		this.animations = [];
 
-        this.orientation = 1;
-        this.facing = 1;
-        this.velocity = {x : 0, y : 0};
-        this.state = 0;
+		this.orientation = 1;
+		this.facing = 1;
+		this.velocity = {x : 0, y : 0};
+		this.state = 0;
 
-	this.health = 144;
-	this.jetpackFuel = 144;
-	this.isFuelDecreasing = true;
-	this.oxygen = 144;
-	this.isOxygenDecreasing = true;
+		this.health = 144;
+		this.jetpackFuel = 144;
+		this.isFuelDecreasing = true;
+		this.oxygen = 144;
+		this.isOxygenDecreasing = true;
+		this.laserPower = 144;
+		this.isLaserDecreasing = true;
 
-	this.laserPower = 144;
-	this.isLaserDecreasing = true;
+		this.damage = 1;
 
-	this.totalLife = 10;
-	this.damage = 1;
+		// Scalar value to determine size of astronaut.
+		this.scale = 2;
 
-        // Scalar value to determine size of astronaut.
-        this.scaleSize = 2;
+		// needs to be dynamic
+		this.width = 41 * this.scale;
+		this.height = 54 * this.scale;
 
-        // needs to be dynamic
-        this.width = 41 * this.scaleSize;
-        this.height = 54 * this.scaleSize;
+		this.laserPosition = this.x - this.game.camera.x + this.width + 63 - 27;
+		this.isFireReady = true;
 
-        this.laserPosition = this.x - this.game.camera.x + this.width + 63 - 27;
-        this.isFireReady = true;
-
-
-        this.loadAnimations();
-        this.updateBB();
-    };
+		this.loadAnimations();
+		this.updateBB();
+    }
 
     /**
      * Creates new animator objects for each astronaut animation and appends those animations
@@ -66,7 +63,7 @@ class Astronaut {
      */
     updateBB() {
         this.lastBB = this.BB;
-        this.BB = new BoundingBox(this.x, this.y, 42 * this.scaleSize, 54 * this.scaleSize);
+        this.BB = new BoundingBox(this.x, this.y, 42 * this.scale, 54 * this.scale);
     };
 
     /**
@@ -253,9 +250,12 @@ class Astronaut {
 		let astronaut = this;
 		entities.forEach(entity => {
 			if (entity.BB && astronaut.BB.collide(entity.BB)) {
-				if (entity instanceof UndergroundMonster) {
+				console.log(entity);
+				if (entity instanceof Alien) {
 					this.health = this.health > 0 ? this.health - 1 : 0;
 
+				} else if (entity instanceof AlienProjectile) {
+					this.health = this.health > 0 ? this.health - this.entity.projectileDamage : 0;
 				} else if (entity instanceof Pickups) {
 					// Determine what pickups
 					this.determinePickup(entity);
@@ -330,7 +330,7 @@ class Astronaut {
      */
     draw(ctx) {
         // Draw animation.
-        this.animations[this.orientation].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, this.scaleSize);
+        this.animations[this.orientation].drawFrame(this.game.clockTick, ctx, this.x - this.game.camera.x, this.y - this.game.camera.y, this.scale);
 
 	    this.drawHealthBar(ctx);
 	    this.drawOxygenBar(ctx);

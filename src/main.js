@@ -19,8 +19,8 @@ ASSET_MANAGER.queueDownload("./res/Rocks.png");
 ASSET_MANAGER.queueDownload("./res/Boulder.png");
 ASSET_MANAGER.queueDownload("./res/MarsRoverConcept.png");
 ASSET_MANAGER.queueDownload("./res/CuriosityRover.png");
-ASSET_MANAGER.queueDownload("./res/undergroundMonsterAttack.png");
-ASSET_MANAGER.queueDownload("./res/undergroundMonsterWalking.png");
+ASSET_MANAGER.queueDownload("./res/mars-turtleAttack.png");
+ASSET_MANAGER.queueDownload("./res/mars-turtleWalking.png");
 ASSET_MANAGER.queueDownload("./res/rockMonsterCreation.png");
 
 ASSET_MANAGER.queueDownload("./res/battery.png");

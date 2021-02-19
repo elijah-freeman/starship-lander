@@ -10,5 +10,6 @@ Tasks
 	- Distribute the game appropriately.
 	- Define movement for enemies. 
 	- Build map more appropriately (Balance gameplay).
-(work)	- Get healthbar / Oxygen Bar / Battery Bar. 
+(done)	- Get healthbar / Oxygen Bar / Battery Bar. 
 	- Scripting Issue (Game is to large) (Minimize to a 1000px)
+(done)	- Make Alien parent class and AlienProjectile classes

@@ -1,5 +1,6 @@
-class GreenAlien {
+class GreenAlien extends Alien {
     constructor(game, x, y, facing) {
+	    super(game, x, y);
         Object.assign(this, {game, x, y, facing});
 
         // Green Alien sprite sheet animations.
@@ -12,6 +13,7 @@ class GreenAlien {
 
         // Scalar value to determine size of Green Alien.
         this.scaleSize  = 3;
+
 
         this.updateBB();
         this.loadAnimations();
@@ -74,3 +76,12 @@ class GreenAlien {
     };
 
 }
+
+class LaserBeam extends AlienProjectile {
+	constructor(game, x, y) {
+		super(game, x, y);
+		Object.assign(this, {game, x, y});
+	        this.projectileDamage = 1;
+	}
+}
+

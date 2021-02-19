@@ -128,10 +128,10 @@ class SceneManager {
 
         this.game.addEntity(new CuriosityRover(this.game, 6500, PARAMS.CANVAS_HEIGHT - 325));
 
-        this.game.addEntity(new UndergroundMonster(this.game, 7200, PARAMS.CANVAS_HEIGHT - 625, 0));
-        this.game.addEntity(new UndergroundMonster(this.game, 8600, PARAMS.CANVAS_HEIGHT - 625, 1));
+        this.game.addEntity(new MarsTurtle(this.game, 7200, PARAMS.CANVAS_HEIGHT - 625, 0));
+        this.game.addEntity(new MarsTurtle(this.game, 8600, PARAMS.CANVAS_HEIGHT - 625, 1));
 
-        this.game.addEntity(new RockMonster(this.game, 9800, PARAMS.CANVAS_HEIGHT - 300));
+        this.game.addEntity(new RockMonsterCreation(this.game, 9800, PARAMS.CANVAS_HEIGHT - 300));
 
 
 
