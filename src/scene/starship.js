@@ -4,7 +4,7 @@ class Starship {
 
         this.game.starship = this;
 
-        this.spritesheet = ASSET_MANAGER.getAsset("./res/Starship.png")
+        this.spritesheet = ASSET_MANAGER.getAsset("./res/starship.png")
 
         this.updateBB();
 

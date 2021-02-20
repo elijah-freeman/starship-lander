@@ -2,10 +2,9 @@ const gameEngine = new GameEngine();
 
 const ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./res/Starship.png");
+ASSET_MANAGER.queueDownload("./res/starship.png");
 ASSET_MANAGER.queueDownload("./res/alien-left.png");
 ASSET_MANAGER.queueDownload("./res/alien-right.png");
-ASSET_MANAGER.queueDownload("./res/chutulu.png");
 ASSET_MANAGER.queueDownload("./res/astronaut/astronaut-left.png");
 ASSET_MANAGER.queueDownload("./res/astronaut/astronaut-right.png");
 ASSET_MANAGER.queueDownload("./res/astronaut/astronautUpRightDir.png");
@@ -15,13 +14,18 @@ ASSET_MANAGER.queueDownload("./res/astronaut/astronautDownLeft.png");
 ASSET_MANAGER.queueDownload("./res/astronaut/astronautUpRight.png");
 ASSET_MANAGER.queueDownload("./res/astronaut/astronautUpLeft.png");
 ASSET_MANAGER.queueDownload("./res/marsLandscape.png");
-ASSET_MANAGER.queueDownload("./res/Rocks.png");
-ASSET_MANAGER.queueDownload("./res/Boulder.png");
+ASSET_MANAGER.queueDownload("./res/rocks.png");
+ASSET_MANAGER.queueDownload("./res/boulder.png");
 ASSET_MANAGER.queueDownload("./res/MarsRoverConcept.png");
-ASSET_MANAGER.queueDownload("./res/CuriosityRover.png");
-ASSET_MANAGER.queueDownload("./res/undergroundMonsterAttack.png");
-ASSET_MANAGER.queueDownload("./res/undergroundMonsterWalking.png");
-ASSET_MANAGER.queueDownload("./res/rockMonsterCreation.png");
+ASSET_MANAGER.queueDownload("./res/perseverance-rover.png");
+ASSET_MANAGER.queueDownload("./res/mars-turtleAttack.png");
+ASSET_MANAGER.queueDownload("./res/mars-turtleWalking.png");
+
+ASSET_MANAGER.queueDownload("./res/rock-monster-creation.png");
+ASSET_MANAGER.queueDownload("./res/rock-monster-recoil.png");
+ASSET_MANAGER.queueDownload("./res/rock-monster-move.png");
+ASSET_MANAGER.queueDownload("./res/rock-monster-bullet.png");
+ASSET_MANAGER.queueDownload("./res/rock-monster-aim.png");
 
 ASSET_MANAGER.queueDownload("./res/battery.png");
 ASSET_MANAGER.queueDownload("./res/oxygen.png");

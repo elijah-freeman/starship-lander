@@ -14,10 +14,10 @@ class SceneManager {
         this.y = 0;
 
         // Background
-        this.game.addEntity(new Background(this.game, -1024, 0,"./res/marsLandscape.png"));
-        this.game.addEntity(new Background(this.game, 0, 0, "./res/marsLandscape.png"));
-        this.game.addEntity(new Background(this.game, 1024, 0, "./res/marsLandscape.png"));
-        this.game.addEntity(new Background(this.game, 2048, 0, "./res/marsLandscape.png"));
+        this.game.addEntity(new Background(this.game, -1024, 0,"./res/mars-landscape.png"));
+        this.game.addEntity(new Background(this.game, 0, 0, "./res/mars-landscape.png"));
+        this.game.addEntity(new Background(this.game, 1024, 0, "./res/mars-landscape.png"));
+        this.game.addEntity(new Background(this.game, 2048, 0, "./res/mars-landscape.png"));
 
 
         // // Rocks
@@ -82,25 +82,26 @@ class SceneManager {
         this.game.addEntity(new Rock(this.game, 1800, PARAMS.CANVAS_HEIGHT - 170, 1));
 
 
-
-        for (let i = 0; i < 4000; i++) {
-            let xPosition = Math.floor(Math.random() * 10000 + 2200);
-            let yPosition = Math.floor(PARAMS.CANVAS_HEIGHT - Math.random() * 150 - 50);
-            let type = Math.floor(Math.random() * 13);
-
-            this.game.addEntity(new Rock(this.game, xPosition, yPosition, type));
-        }
-
+	// TODO - I can't prebuild the map in this way. Esspecially with the rocks.
+	    // I'll have to make sure to only build it out as we move along the map. 
+//        for (let i = 0; i < 400; i++) {
+//            let xPosition = Math.floor(Math.random() * 10000 + 2200);
+//            let yPosition = Math.floor(PARAMS.CANVAS_HEIGHT - Math.random() * 150 - 50);
+//            let type = Math.floor(Math.random() * 13);
+//
+//            this.game.addEntity(new Rock(this.game, xPosition, yPosition, type));
+//        }
+//
         this.game.addEntity(new Boulder(this.game, 1500, PARAMS.CANVAS_HEIGHT - 350));
 
 
-        for (let i = 0; i < 2000; i++) {
-            let xPosition = Math.floor(Math.random() * 5000 + 12200);
-            let yPosition = Math.floor(PARAMS.CANVAS_HEIGHT - Math.random() * 150 - 50);
-            let type = Math.floor(Math.random() * 13);
-
-            this.game.addEntity(new Rock(this.game, xPosition, yPosition, type));
-        }
+//        for (let i = 0; i < 200; i++) {
+//            let xPosition = Math.floor(Math.random() * 5000 + 12200);
+//           let yPosition = Math.floor(PARAMS.CANVAS_HEIGHT - Math.random() * 150 - 50);
+//            let type = Math.floor(Math.random() * 13);
+//
+//            this.game.addEntity(new Rock(this.game, xPosition, yPosition, type));
+ //       }
 	
 	//Add Pickups
 	for (let i = 0; i < 200; i++) {
@@ -108,6 +109,7 @@ class SceneManager {
 		let yPosition = PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH + 50;
 		this.game.addEntity(new Battery(this.game, xPosition, yPosition));
 	}
+
 
 	for (let i = 0; i < 200; i++) {
 		let xPosition = Math.floor(Math.random() * 10000);
@@ -124,12 +126,16 @@ class SceneManager {
 	
         this.game.addEntity(new MarsRoverConcept(this.game, 5000, PARAMS.CANVAS_HEIGHT - 325));
 
-        this.game.addEntity(new CuriosityRover(this.game, 6500, PARAMS.CANVAS_HEIGHT - 325));
+        this.game.addEntity(new PerseveranceRover(this.game, 6500, PARAMS.CANVAS_HEIGHT - 325));
 
-        this.game.addEntity(new UndergroundMonster(this.game, 7200, PARAMS.CANVAS_HEIGHT - 625, 0));
-        this.game.addEntity(new UndergroundMonster(this.game, 8600, PARAMS.CANVAS_HEIGHT - 625, 1));
+        this.game.addEntity(new MarsTurtle(this.game, 7200, PARAMS.CANVAS_HEIGHT - 625, 0));
+        this.game.addEntity(new MarsTurtle(this.game, 8600, PARAMS.CANVAS_HEIGHT - 625, 1));
 
-        this.game.addEntity(new RockMonster(this.game, 9800, PARAMS.CANVAS_HEIGHT - 300));
+        this.game.addEntity(new RockMonsterCreation(this.game, 9800, PARAMS.CANVAS_HEIGHT - 300));
+        let entit = new RockMonster(this.game, 1000, PARAMS.CANVAS_HEIGHT - 300)
+        console.log(entit);
+	this.game.addEntity(entit);
+
 
 
 
