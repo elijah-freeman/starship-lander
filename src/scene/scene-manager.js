@@ -138,6 +138,8 @@ class SceneManager {
 
     };
 
+
+
     update() {
         PARAMS.DEBUG = document.getElementById("debug").checked;
         let midpoint = PARAMS.CANVAS_WIDTH / 2 - PARAMS.BLOCKWIDTH /2;
@@ -145,8 +147,23 @@ class SceneManager {
         if (this.astronaut.y < 100) {
             this.y = this.astronaut.y - 100;
         }
-        this.x = this.astronaut.x - midpoint;
-        this.game.astronautPosition = this.x;
+
+        // this.x += this.x - midpoint;
+
+	    // console.log(`This beginner: ${this.x - midpoint}`);
+	    // console.log(`This end: ${this.x + midpoint}`);
+        //
+	    // let begin = this.x - midpoint;
+	    // let  end = this.x + midpoint;
+        //
+	    // console.log(`Begin: ${begin}`);
+	    // console.log(`End: ${end}`);
+		// this.game.entities.forEach(entity => {
+		// 	if ((entity.x < begin || entity.x > end)) {
+		// 		entity.removeFromWorld = true;
+		// 	}
+		// });
+
     };
     draw(ctx) {};
 
