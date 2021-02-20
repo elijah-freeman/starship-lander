@@ -14,7 +14,6 @@ class RockMonsterCreation extends Alien {
 
 	update() {
 		super.updateBB();
-		this.game.addEntity(new RockShard(this.game, this.x, this.y));
 	}
 
 	draw(ctx) {
