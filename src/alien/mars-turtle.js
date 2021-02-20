@@ -13,7 +13,7 @@ class MarsTurtle extends Alien {
 
 		this.scale = 2;
 		this.velocity = {x, y};
-		this.isAttack = false;
+		this.isModeAttack = false;
 		this.health = 100;
 
 		this.animation = this.type;
@@ -30,39 +30,28 @@ class MarsTurtle extends Alien {
 	}
 
 	update() {
-		const TICK = this.game.clockTick;
 		const speed = 100;
+		const left = 0;
 
-		this.velocity.x = 0;
-
-		if (!this.isAttack) {
+		if (!this.isModeAttack) {
 			this.animation = 0;
-			this.velocity.x -= speed;
-
+			super.moveAlien(speed, left);
 			setTimeout(() => {
+				this.isModeAttack = true;
 				this.animation = 1;
-				this.isAttack = true;
 				}, 10000);
 
 		} else {
 			this.animation = 1;
 		}
 
-		if (this.isAttack) {
+		if (this.isModeAttack) {
 			setTimeout(() => {
-				this.isAttack = false;
+				this.isModeAttack = false;
 				this.animation = 0;
 				}, 10000);
 		}
 
-		// Update the coordinates of the astronaut.
-		this.x += this.velocity.x * TICK * PARAMS.SCALE;
-
-		if (this.health === 0 && this.y < PARAMS.CANVAS_HEIGHT - 250
-			&& this.animation === 0) {
-
-			this.y += this.velocity.y * TICK * PARAMS.SCALE;
-		}
 
 		this.updateBB();
 		this.checkCollision(this.game.entities);

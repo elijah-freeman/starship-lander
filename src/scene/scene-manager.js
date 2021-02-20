@@ -14,10 +14,10 @@ class SceneManager {
         this.y = 0;
 
         // Background
-        this.game.addEntity(new Background(this.game, -1024, 0,"./res/marsLandscape.png"));
-        this.game.addEntity(new Background(this.game, 0, 0, "./res/marsLandscape.png"));
-        this.game.addEntity(new Background(this.game, 1024, 0, "./res/marsLandscape.png"));
-        this.game.addEntity(new Background(this.game, 2048, 0, "./res/marsLandscape.png"));
+        this.game.addEntity(new Background(this.game, -1024, 0,"./res/mars-landscape.png"));
+        this.game.addEntity(new Background(this.game, 0, 0, "./res/mars-landscape.png"));
+        this.game.addEntity(new Background(this.game, 1024, 0, "./res/mars-landscape.png"));
+        this.game.addEntity(new Background(this.game, 2048, 0, "./res/mars-landscape.png"));
 
 
         // // Rocks
@@ -126,12 +126,16 @@ class SceneManager {
 	
         this.game.addEntity(new MarsRoverConcept(this.game, 5000, PARAMS.CANVAS_HEIGHT - 325));
 
-        this.game.addEntity(new CuriosityRover(this.game, 6500, PARAMS.CANVAS_HEIGHT - 325));
+        this.game.addEntity(new PerseveranceRover(this.game, 6500, PARAMS.CANVAS_HEIGHT - 325));
 
         this.game.addEntity(new MarsTurtle(this.game, 7200, PARAMS.CANVAS_HEIGHT - 625, 0));
         this.game.addEntity(new MarsTurtle(this.game, 8600, PARAMS.CANVAS_HEIGHT - 625, 1));
 
         this.game.addEntity(new RockMonsterCreation(this.game, 9800, PARAMS.CANVAS_HEIGHT - 300));
+        let entit = new RockMonster(this.game, 1000, PARAMS.CANVAS_HEIGHT - 300)
+        console.log(entit);
+	this.game.addEntity(entit);
+
 
 
 

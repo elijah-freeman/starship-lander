@@ -44,8 +44,8 @@ class Astronaut {
 	}
 
 	loadAnimations() {
-		this.animations.push(new Animator(this.walkLeft, 0, 0, 41, 54, 7, 0.2, 0, false, true));
-		this.animations.push(new Animator(this.walkRight, 0, 0, 41, 54, 7, 0.2, 0, false, true));
+		this.animations.push(new Animator(this.walkLeft, 0, 0, 41, 54, 7, 0.05, 0, false, true));
+		this.animations.push(new Animator(this.walkRight, 0, 0, 41, 54, 7, 0.05, 0, false, true));
 		this.animations.push(new Animator(this.moveUpRight, 0, 0, 42, 51, 4, 0.2, 0, false, true));
 		this.animations.push(new Animator(this.moveUpLeft, 0, 0, 42, 51, 4, 0.2, 0, false, true));
 		this.animations.push(new Animator(this.downRight, 0, 0, 41, 52, 5, 0.2, 0, false, true));
@@ -86,7 +86,7 @@ class Astronaut {
 
 		// Physics
 		const TICK = this.game.clockTick;
-		const WALK_VELOCITY = 100.0;
+		const WALK_VELOCITY = 300.0;
 		const FLY_VELOCITY = 200;
 		const DECELERATE_VELOCITY = 100;
 		const FALL_ACCELERATION = 150;
@@ -255,14 +255,14 @@ class Astronaut {
 		let astronaut = this;
 		entities.forEach(entity => {
 			if (entity.BB && astronaut.BB.collide(entity.BB)) {
-				console.log(entity);
 				if (entity instanceof Alien) {
 					this.health = this.health > 0 ? this.health - 1 : 0;
 
 				} else if (entity instanceof AlienProjectile) {
 					this.health = this.health > 0 
-						? this.health - this.entity.projectileDamage 
+						? this.health - entity.projectileDamage 
 						: 0;
+					entity.removeFromWorld = true;
 				} else if (entity instanceof Pickups) {
 					// Determine what pickups
 					this.determinePickup(entity);
