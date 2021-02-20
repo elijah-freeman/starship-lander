@@ -99,16 +99,31 @@ class GameEngine {
     update() {
         var entitiesCount = this.entities.length;
 
+        console.log(this.astronautPosition);
+
+
         for (var i = 0; i < entitiesCount; i++) {
             var entity = this.entities[i];
 
+
             // TODO - Remove after implementing below if-statement
             entity.update();
+
+		if ((entity.x < this.astronautPosition - this.midpoint || entity.x > this.astronautPosition + this.midpoint)) {
+			let below = this.astronautPosition - this.midpoint;
+			let above = this.astronautPosition + this.midpoint;
+			console.log(`Below ${below}`);
+			console.log(`Above ${above}`);
+			// entity.removeFromWorld = true;
+		}
+
 
             // TODO - Currently do not have this function (found in enemies class - supermariobros)
             if (!entity.removeFromWorld) {
                 entity.update();
             }
+
+		
         }
 
         // TODO - Currently do not have this function (found in enemies class - supermariobros)

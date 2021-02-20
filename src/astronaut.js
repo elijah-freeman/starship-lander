@@ -13,7 +13,6 @@ class Astronaut {
 		this.upLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpRight.png");
 
 		this.animations = [];
-
 		this.orientation = 1;
 		this.facing = 1;
 		this.velocity = {x : 0, y : 0};
@@ -86,7 +85,7 @@ class Astronaut {
 
 		// Physics
 		const TICK = this.game.clockTick;
-		const WALK_VELOCITY = 300.0;
+		const WALK_VELOCITY = 400;
 		const FLY_VELOCITY = 200;
 		const DECELERATE_VELOCITY = 100;
 		const FALL_ACCELERATION = 150;

@@ -65,8 +65,6 @@ class SceneManager {
         this.game.addEntity(new Rock(this.game, 1290, PARAMS.CANVAS_HEIGHT - 135, 8));
 
 
-
-
         this.game.addEntity(new Rock(this.game, 1340, PARAMS.CANVAS_HEIGHT - 150, 0));
         this.game.addEntity(new Rock(this.game, 1330, PARAMS.CANVAS_HEIGHT - 150, 11));
         this.game.addEntity(new Rock(this.game, 1350, PARAMS.CANVAS_HEIGHT - 190, 2));
@@ -82,26 +80,18 @@ class SceneManager {
         this.game.addEntity(new Rock(this.game, 1800, PARAMS.CANVAS_HEIGHT - 170, 1));
 
 
-	// TODO - I can't prebuild the map in this way. Esspecially with the rocks.
+	// TODO - I can't prebuild the map in this way. Esspecially with the rocks.j
 	    // I'll have to make sure to only build it out as we move along the map. 
-//        for (let i = 0; i < 400; i++) {
-//            let xPosition = Math.floor(Math.random() * 10000 + 2200);
-//            let yPosition = Math.floor(PARAMS.CANVAS_HEIGHT - Math.random() * 150 - 50);
-//            let type = Math.floor(Math.random() * 13);
-//
-//            this.game.addEntity(new Rock(this.game, xPosition, yPosition, type));
-//        }
-//
+        for (let i = 0; i < 40; i++) {
+            let xPosition = Math.floor(Math.random() * 10000 + 2200);
+            let yPosition = Math.floor(PARAMS.CANVAS_HEIGHT - Math.random() * 150 - 50);
+            let type = Math.floor(Math.random() * 13);
+
+            this.game.addEntity(new Rock(this.game, xPosition, yPosition, type));
+        }
+
         this.game.addEntity(new Boulder(this.game, 1500, PARAMS.CANVAS_HEIGHT - 350));
 
-
-//        for (let i = 0; i < 200; i++) {
-//            let xPosition = Math.floor(Math.random() * 5000 + 12200);
-//           let yPosition = Math.floor(PARAMS.CANVAS_HEIGHT - Math.random() * 150 - 50);
-//            let type = Math.floor(Math.random() * 13);
-//
-//            this.game.addEntity(new Rock(this.game, xPosition, yPosition, type));
- //       }
 	
 	//Add Pickups
 	for (let i = 0; i < 200; i++) {
@@ -132,13 +122,7 @@ class SceneManager {
         this.game.addEntity(new MarsTurtle(this.game, 8600, PARAMS.CANVAS_HEIGHT - 625, 1));
 
         this.game.addEntity(new RockMonsterCreation(this.game, 9800, PARAMS.CANVAS_HEIGHT - 300));
-        let entit = new RockMonster(this.game, 1000, PARAMS.CANVAS_HEIGHT - 300)
-        console.log(entit);
-	this.game.addEntity(entit);
-
-
-
-
+	this.game.addEntity(new RockMonster(this.game, 1000, PARAMS.CANVAS_HEIGHT - 300));
 
         // Green Aliens
         this.game.addEntity(new GreenAlien(this.game, 1000, PARAMS.CANVAS_HEIGHT - 2 * PARAMS.BLOCKWIDTH+30, 0));
@@ -157,10 +141,12 @@ class SceneManager {
     update() {
         PARAMS.DEBUG = document.getElementById("debug").checked;
         let midpoint = PARAMS.CANVAS_WIDTH / 2 - PARAMS.BLOCKWIDTH /2;
+	    this.game.midpoint = midpoint;
         if (this.astronaut.y < 100) {
             this.y = this.astronaut.y - 100;
         }
         this.x = this.astronaut.x - midpoint;
+        this.game.astronautPosition = this.x;
     };
     draw(ctx) {};
 
