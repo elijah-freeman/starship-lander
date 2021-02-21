@@ -147,25 +147,7 @@ class SceneManager {
             this.y = this.astronaut.y - 100;
         }
         this.x = this.astronaut.x - midpoint;
-    
-        // this.x += this.x - midpoint;
-
-	    // console.log(`This beginner: ${this.x - midpoint}`);
-	     // console.log(`This end: ${this.x + midpoint}`);
-        //
-	     let begin = this.x - midpoint;
-	     let  end = this.x + midpoint;
-        //
-	     console.log(`Begin: ${begin}`);
-	     console.log(`End: ${end}`);
-		 this.game.entities.forEach(entity => {
-		 	if ((entity.x < begin || entity.x > end)) {
-			//	entity.removeFromWorld = true;
-						
-		 	}
-		 });
-
-    };
+    }
     draw(ctx) {};
 
 }
