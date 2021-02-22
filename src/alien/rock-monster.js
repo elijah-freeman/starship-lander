@@ -9,7 +9,12 @@ class RockMonsterCreation extends Alien {
 		this.scale = 1;
 
 		this.animation = new Animator(this.sprite, 0, 0, this.width,
-			this.height, 27, 0.25, 0, false, true);
+			this.height, 27, 0.09, 0, false, false);
+
+		setTimeout(() => {
+			let x = this.x + this.width/2 - 60;
+			this.game.addEntity(new RockMonster(this.game, x, this.y));
+		}, 2400.3);
 	}
 
 	update() {
@@ -76,7 +81,7 @@ class RockMonster extends Alien {
 			this.animationIndex = ANIMATION.RECOIL;
 			if (this.fireProjectileRate === this.fireProjectileCount) {
 				let y = Math.random() * 30 + this.y;
-				this.game.addEntity(new RockShard(this.game, this.x, y));
+				this.game.addEntity(new RockShard(this.game, this.x, y + 35));
 				this.fireProjectileCount = 0;
 			}
 			this.fireProjectileCount++;

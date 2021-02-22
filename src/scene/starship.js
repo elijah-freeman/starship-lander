@@ -12,7 +12,7 @@ class Starship {
 
         // States
 
-        this.scaleSize = 2;
+        this.scaleSize = 1;
 
         // Movement
         this.velocity = {x: 0, y: 0}
