@@ -34,6 +34,8 @@ ASSET_MANAGER.queueDownload("./res/astronautLaser.png");
 ASSET_MANAGER.queueDownload("./res/battery.png");
 ASSET_MANAGER.queueDownload("./res/oxygen.png");
 ASSET_MANAGER.queueDownload("./res/jetpack.png");
+ASSET_MANAGER.queueDownload("./res/colony-hub-small.png");
+ASSET_MANAGER.queueDownload("./res/colony-hub-large.png");
 
 ASSET_MANAGER.downloadAll(function () {
 	PARAMS.BLOCKWIDTH = PARAMS.BITWIDTH * PARAMS.SCALE;

@@ -7,10 +7,12 @@ class Starship {
         this.spritesheet = ASSET_MANAGER.getAsset("./res/starship.png")
 
         this.updateBB();
+	    this.width = 459;
+	    this.height = 972;
 
         // States
 
-        this.scaleSize = 8;
+        this.scaleSize = 2;
 
         // Movement
         this.velocity = {x: 0, y: 0}
@@ -22,7 +24,7 @@ class Starship {
 
     loadAnimations() {
 
-        let simpleAnimation = new Animator(this.spritesheet, 0, 0, 128, 128, 1, 0.33, 0, false, true);
+        let simpleAnimation = new Animator(this.spritesheet, 0, 0, this.width, this.height, 1, 0.33, 0, false, true);
         this.animations.push(simpleAnimation);
     };
 
