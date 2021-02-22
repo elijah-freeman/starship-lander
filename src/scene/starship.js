@@ -1,7 +1,7 @@
 class Starship {
 	constructor(game, x, y) {
 		Object.assign(this, {game, x, y});
-		this.spritesheet = ASSET_MANAGER.getAsset("./res/starship.png")
+		this.spritesheet = ASSET_MANAGER.getAsset("./res/Starship.png")
 
 		this.updateBB();
 		this.width = 459;

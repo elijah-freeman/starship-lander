@@ -2,7 +2,7 @@ const gameEngine = new GameEngine();
 
 const ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./res/starship.png");
+ASSET_MANAGER.queueDownload("./res/Starship.png");
 ASSET_MANAGER.queueDownload("./res/alien-left.png");
 ASSET_MANAGER.queueDownload("./res/alien-right.png");
 ASSET_MANAGER.queueDownload("./res/astronaut/astronaut-left.png");
@@ -14,8 +14,8 @@ ASSET_MANAGER.queueDownload("./res/astronaut/astronautDownLeft.png");
 ASSET_MANAGER.queueDownload("./res/astronaut/astronautUpRight.png");
 ASSET_MANAGER.queueDownload("./res/astronaut/astronautUpLeft.png");
 ASSET_MANAGER.queueDownload("./res/marsLandscape.png");
-ASSET_MANAGER.queueDownload("./res/rocks.png");
-ASSET_MANAGER.queueDownload("./res/boulder.png");
+ASSET_MANAGER.queueDownload("./res/Rocks.png");
+ASSET_MANAGER.queueDownload("./res/Boulder.png");
 ASSET_MANAGER.queueDownload("./res/MarsRoverConcept.png");
 ASSET_MANAGER.queueDownload("./res/perseverance-rover.png");
 ASSET_MANAGER.queueDownload("./res/mars-turtleAttack.png");
