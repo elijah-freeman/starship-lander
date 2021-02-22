@@ -92,6 +92,7 @@ class SceneManager {
 
         this.game.addEntity(new Boulder(this.game, 1500, PARAMS.CANVAS_HEIGHT - 350));
 	    this.game.addEntity(new LargeColonyHub(this.game, 1000, PARAMS.CANVAS_HEIGHT - 350));
+	    this.game.addEntity(new SmallColonyHub(this.game, 500, PARAMS.CANVAS_HEIGHT - 350));
 
 	
 	//Add Pickups
