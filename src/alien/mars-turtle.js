@@ -11,7 +11,7 @@ class MarsTurtle extends Alien {
 		this.widthWalk = 276;
 		this.heightWalk = 171;
 
-		this.scale = 2;
+		this.scale = 1;
 		this.velocity = {x, y};
 		this.isModeAttack = false;
 		this.health = 100;
@@ -30,7 +30,7 @@ class MarsTurtle extends Alien {
 	}
 
 	update() {
-		const speed = 100;
+		const speed = 10;
 		const left = 0;
 
 		if (!this.isModeAttack) {

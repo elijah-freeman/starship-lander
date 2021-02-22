@@ -13,8 +13,13 @@ class PerseveranceRover extends Vehicle {
 
 	update() {
 		let left = 0;
+		let right = 1;
 		let speed = 10;
-		super.moveVehicle(speed, left);
+		if (!this.x < 2500) {
+			super.moveVehicle(speed, left);
+		} else {
+			super.moveVehicle(speed, right);
+		}
 		this.updateBB();
 	}
 

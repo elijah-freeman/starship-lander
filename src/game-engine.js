@@ -102,13 +102,17 @@ class GameEngine {
         for (var i = 0; i < entitiesCount; i++) {
             var entity = this.entities[i];
 
+
             // TODO - Remove after implementing below if-statement
             entity.update();
+
 
             // TODO - Currently do not have this function (found in enemies class - supermariobros)
             if (!entity.removeFromWorld) {
                 entity.update();
             }
+
+		
         }
 
         // TODO - Currently do not have this function (found in enemies class - supermariobros)

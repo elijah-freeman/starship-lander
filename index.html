@@ -6,6 +6,14 @@
 
     <link rel="stylesheet" href="app.css">
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Orbitron', serif;
+            font-size: 24px;
+        }
+    </style>
 
 
 </head>
@@ -16,8 +24,12 @@
     <br>
     <label for="debug">Debug</label>
     <input type="checkbox" id="debug" checked>
+    <p> Use WASD or Arrow keys to explore! </p>
+    <p> Pick up batteries, oxygen, and jetpack fuel to reach the Mars base. </p>
 </div>
 
+<script type="text/javascript" src="src/bounding-box.js"></script>
+<script type="text/javascript" src="live.js"></script>
 <script type="text/javascript" src="src/asset-manager.js"></script>
 <script type="text/javascript" src="src/timer.js"></script>
 <script type="text/javascript" src="src/game-engine.js"></script>
@@ -27,7 +39,6 @@
 <script type="text/javascript" src="src/scene/starship.js"></script>
 <script type="text/javascript" src="src/scene/scene-manager.js"></script>
 <script type="text/javascript" src="src/animator.js"></script>
-<script type="text/javascript" src="src/bounding-box.js"></script>
 <script type="text/javascript" src="src/alien/alien-projectile.js"></script>
 <script type="text/javascript" src="src/alien/alien.js"></script>
 <script type="text/javascript" src="src/alien/green-alien.js"></script>
@@ -40,6 +51,7 @@
 <script type="text/javascript" src="src/alien/mars-turtle.js"></script>
 <script type="text/javascript" src="src/alien/rock-monster.js"></script>
 <script type="text/javascript" src="src/pickups.js"></script>
+<script type="text/javascript" src="src/mars-base.js"></script>
 
 </body>
 </html>

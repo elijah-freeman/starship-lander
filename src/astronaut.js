@@ -13,11 +13,11 @@ class Astronaut {
 		this.upLeft = ASSET_MANAGER.getAsset("./res/astronaut/astronautUpRight.png");
 
 		this.animations = [];
-
 		this.orientation = 1;
 		this.facing = 1;
 		this.velocity = {x : 0, y : 0};
 		this.state = 0;
+		this.isGameOver = false;
 
 		this.health = 144;
 		this.jetpackFuel = 144;
@@ -86,7 +86,7 @@ class Astronaut {
 
 		// Physics
 		const TICK = this.game.clockTick;
-		const WALK_VELOCITY = 300.0;
+		const WALK_VELOCITY = 150;
 		const FLY_VELOCITY = 200;
 		const DECELERATE_VELOCITY = 100;
 		const FALL_ACCELERATION = 150;
@@ -107,6 +107,7 @@ class Astronaut {
 			this.orientation = Orientation.LEFT;
 			this.facing = Facing.LEFT;
 			this.state = State.FALLING;
+			
 		}
 		// Orientation Up and Right
 		else if (this.game.up && this.game.right && !this.game.left) {
@@ -179,12 +180,13 @@ class Astronaut {
 			this.velocity.y += FALL_ACCELERATION;
 		}
 
+		if (this.x < -150 && this.velocity.x < 0) {
+			this.velocity.x = 0;
+		}
 
-
-		// Update the coordinates of the astronaut.
-		this.x += this.velocity.x * TICK * PARAMS.SCALE;
-		this.y += this.velocity.y * TICK * PARAMS.SCALE;
-		this.updateBB();
+		if (this.y < 100 && this.velocity.y < 0) {
+			this.velocity.y = 0;
+		}
 
 		let that = this;
 		this.game.entities.forEach(function (entity) {
@@ -213,6 +215,13 @@ class Astronaut {
 					}
 					that.updateBB();
 				}
+
+				if (entity instanceof RockMonster) {
+					if (that.BB.right >= entity.BB.left) {
+						if (that.velocity.x > 0) that.velocity.x = 0;
+					}
+				}
+
 			}
 		});
 
@@ -238,10 +247,24 @@ class Astronaut {
 			}
 		}
 
+		// Update the coordinates of the astronaut.
+		this.x += this.velocity.x * TICK * PARAMS.SCALE;
+		this.y += this.velocity.y * TICK * PARAMS.SCALE;
+		this.updateBB();
+
+		this.checkIsGameOver();
 		this.checkCollision(this.game.entities);
 		this.isOxygenRemaining();
 		this.checkFuelLevels();
 	}
+
+	checkIsGameOver() {
+		if (this.x >= 7500) {
+			this.isGameOver = true;
+			this.removeFromWorld = true;
+		}
+	}
+		
 
 	checkFuelLevels() {
 		const max = 144;
@@ -275,11 +298,12 @@ class Astronaut {
 	determinePickup(entity) {
 
 		if (entity instanceof Battery) {
-			this.laserPower += 1;
+			this.laserPower += 10;
 		} else if (entity instanceof Jetpack) {
-			this.jetpackFuel += 1;
+			this.jetpackFuel += 20;
 		} else if (entity instanceof Oxygen) {
-			this.oxygen += 1;
+			this.oxygen += 10;
+			this.health += 100;
 		} 
 
 	}
@@ -287,7 +311,7 @@ class Astronaut {
 	isLaserPowerRemaining() {
 		if (this.isLaserDecreasing) {
 			this.isLaserDecreasing = false;
-			this.laserPower = this.laserPower > 0 ? this.laserPower - 1 : 0;
+			this.laserPower = this.laserPower > 0 ? this.laserPower - 3 : 0;
 			setTimeout(() => {
 				this.isLaserDecreasing = true;
 			}, 1000);
@@ -297,7 +321,7 @@ class Astronaut {
 	isOxygenRemaining() {
 		if (this.isOxygenDecreasing) {
 			this.isOxygenDecreasing = false;
-			this.oxygen = this.oxygen > 0 ? this.oxygen - 1 : 0;
+			this.oxygen = this.oxygen > 0 ? this.oxygen - 4 : 0;
 			setTimeout(() => {
 				this.isOxygenDecreasing = true;
 			}, 1000);
@@ -318,10 +342,10 @@ class Astronaut {
 	startFuelTimeout() {
 		if (this.isFuelDecreasing) {
 			this.isFuelDecreasing = false;
-			this.jetpackFuel = this.jetpackFuel > 0 ? this.jetpackFuel - 1 : 0;
+			this.jetpackFuel = this.jetpackFuel > 0 ? this.jetpackFuel - 10 : 0;
 			setTimeout(() => {
 				this.isFuelDecreasing = true;
-			}, 300);
+			}, 500);
 		}
 	}
 			
