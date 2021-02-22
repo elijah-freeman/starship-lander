@@ -1,20 +1,35 @@
 class RockMonsterCreation extends Alien {
-	constructor(game,  x, y) {
+	constructor(game,  x, y, animationReverse, loopReverse) {
 		super(game, x, y);
-		Object.assign(this, {game, x, y});
+		Object.assign(this, {game, x, y, animationReverse, loopReverse});
 
 		this.sprite = ASSET_MANAGER.getAsset('./res/rock-monster-creation.png');
 		this.width = 585;
 		this.height = 225;
 		this.scale = 1;
 
-		this.animation = new Animator(this.sprite, 0, 0, this.width,
-			this.height, 27, 0.09, 0, false, false);
+		this.animation = new Animator(this.sprite, 0, 0, this.width
+			, this.height, 27, 0.09, 0, this.animationReverse, this.loopReverse);
+		
+		if (!this.animationReverse) {
+			this.animateRockMonster();
+		} else {
+			setTimeout(() => {
+				this.removeFromWorld = true;
+			}, 2200.3);
+		}
+		super.updateBB();
+		 
+		
+	}
 
+	animateRockMonster() {
 		setTimeout(() => {
-			let x = this.x + this.width/2 - 60;
-			this.game.addEntity(new RockMonster(this.game, x, this.y));
-		}, 2400.3);
+			let x = this.x + this.width/2 - 100;
+			let y = this.y + 1;
+			this.game.addEntity(new RockMonster(this.game, x, y));
+			this.removeFromWorld = true;
+		}, 2200.3);
 	}
 
 	update() {
@@ -41,6 +56,7 @@ class RockMonster extends Alien {
 		this.loadSprites();
 		this.loadAnimations();
 
+		this.health = 20;
 		this.fireProjectileRate = 20;
 		this.fireProjectileCount = 0;
 		this.isModeAttack = false;
@@ -49,14 +65,14 @@ class RockMonster extends Alien {
 
 	loadAnimations() {
 		this.animations = [];
-		this.animations.push(new Animator(this.aim, 0, 0, this.width,
-			this.height, 11, 0.25, 0, false, false));
+		this.animations.push(new Animator(this.aim, 0, 0, this.width
+			,this.height, 11, 0.25, 0, false, false));
 
-		this.animations.push(new Animator(this.move, 0, 0, this.width,
-			this.height, 6, 0.25, 0, false, true));
+		this.animations.push(new Animator(this.move, 0, 0, this.width
+			,this.height, 6, 0.25, 0, false, true));
 
-		this.animations.push(new Animator(this.recoil, 0, 0, this.width,
-			this.height, 6, 0.05, 0, false, true));
+		this.animations.push(new Animator(this.recoil, 0, 0, this.width
+			,this.height, 6, 0.05, 0, false, true));
 	}
 
 	loadSprites() {
@@ -67,7 +83,7 @@ class RockMonster extends Alien {
 
 	update() {
 		const ANIMATION = { AIM: 0, MOVE: 1, RECOIL: 2 };
-		const speed = 50;
+		const speed = 25;
 		const left = 0;
 
 		if (!this.isModeAttack) {
@@ -75,7 +91,7 @@ class RockMonster extends Alien {
 			super.moveAlien(speed, left);
 			setTimeout(() => {
 				this.isModeAttack = true;
-				}, 10000);
+				}, 3000);
 
 		} else {
 			this.animationIndex = ANIMATION.RECOIL;
@@ -85,17 +101,42 @@ class RockMonster extends Alien {
 				this.fireProjectileCount = 0;
 			}
 			this.fireProjectileCount++;
-			
 		}
 
 		if (this.isModeAttack) {
 			setTimeout(() => {
 				this.isModeAttack = false;
-				}, 100000);
+				}, 10000);
 		}
 
+		console.log(this.health);
+		this.hasDied();
 		super.updateBB();
+		this.checkCollision(this.game.entities);
+
 	}
+
+	hasDied() {
+		if (this.health <= 0) {
+			let x = this.x - this.width/2 - 100;
+			let y = this.y + 1;
+			this.game.addEntity(new RockMonsterCreation(this.game, x, y, true));
+			this.removeFromWorld = true;
+		}
+	}
+
+	checkCollision(entities) {
+		const rockMonster = this;
+		entities.forEach(entity => {
+			if (entity.BB && rockMonster.BB.collide(entity.BB)) {
+				if (entity instanceof AstronautLaser) {
+					this.health = this.health > 0 ? this.health - 1 : 0;
+					entity.removeFromWorld = true;
+				}
+			}
+		})
+	}
+	
 
 	draw(ctx) {
 		this.animations[this.animationIndex].drawFrame(this.game.clockTick, ctx,

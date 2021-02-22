@@ -15,7 +15,9 @@ class MarsRoverConcept extends Vehicle {
 
 	update() {
 		this.updateBB();
-		super.moveVehicle(20, 0);
+		if (this.x < 5300) {
+		//	super.moveVehicle(20, 0);
+		}
 	}
 
 	updateBB() {
